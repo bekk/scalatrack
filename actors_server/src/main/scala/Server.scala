@@ -1,29 +1,38 @@
 import _root_.messages._
+import _root_.no.bekk.scala.Team
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 abstract class Server extends Actor{
-  val chalanges: Map[String, String];
+  val chalanges: List[no.bekk.scala.Chalange];
+  var teamChalanges = Map[Team, Int]();
+  
+  private def nextChalange(team:Team) = {
+    teamChalanges.get(team) match {
+      case None => {
+        val next = chalanges(0)
+        teamChalanges = teamChalanges + ((team, 1))
+        next
+      }
+      case Some(chalange) => {
+        val next = chalanges(chalange)
+        teamChalanges = teamChalanges + ((team, chalange +1))
+        next
+      }
+    }
 
-  private var chalange = 0
-  private def nextChalange = {
-    val next = chalanges.toList(chalange)
-    chalange = chalange + 1
-    next
   }
 
-  def handleAnswer(chalange:Chalange, answer:String)={
-    chalanges.get(chalange.question) match
-    {
-      case Some(`answer`) => Correct()
-      case _ => Wrong()      
-    }
+  def handleAnswer(chalange:Question, answer:String)={
+    if(chalanges.exists(_.equals(new no.bekk.scala.Chalange(chalange.question, answer))))
+      Correct()
+    else
+      Wrong()
   }
 
   def receive={
-    case x@MoreChalange() => self.reply(Chalange(nextChalange._1))
-    case x:Response => Correct()
-    case Answer(_, chalange, answer) => self.reply(handleAnswer(chalange, answer)) 
+    case x@MoreChalanges(team) => self.reply(Question(nextChalange(team).question))
+    case Answer(team, chalange, answer) => self.reply(handleAnswer(chalange, answer)) 
   }
 }
 

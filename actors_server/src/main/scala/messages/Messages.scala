@@ -1,12 +1,12 @@
 package messages
 
+import _root_.no.bekk.scala.Team
 import se.scalablesolutions.akka.actor.ActorRef
 trait Message
 
-case class MoreChalange() extends Message
-case class Chalange(val question:String) extends Message
-case class Response(val chalange : Chalange, val teamName : String, val message:String) extends Message
+case class MoreChalanges(val team:Team) extends Message
+case class Question(val question:String) extends Message
 
-case class Answer(val temaName:String, val chalange:Chalange, val answer: String) extends Message
+case class Answer(val temaName:Team, val chalange:Question, val answer: String) extends Message
 case class Correct()
 case class Wrong() 

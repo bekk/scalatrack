@@ -1,4 +1,5 @@
-import messages.{Response, Chalange, MoreChalange}
+import _root_.messages.{Answer, Question, MoreChalanges}
+import _root_.no.bekk.scala.Team
 import se.scalablesolutions.akka.actor.Actor
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
@@ -11,25 +12,31 @@ trait Publisher
 
 abstract class Client
 {
+  val team:Team
   val publisher: ActorRef;
   def run {
     val remote = publisher
 
     println("remote er " + remote)
 
-    val chalange = remote !! MoreChalange()
+    val chalange = remote !! MoreChalanges(team)
     println("received " + chalange)
 
     chalange match {
-      case Some(x@Chalange(_)) => remote !! Response(x, "tull", "hei")
+      case Some(x@Question(_)) => remote !! Answer(team, x, "hei")
       case _ => println("hva..")
     }
 
   }
 }
 
+trait TestTeam
+{
+  val team = new Team("test")
+}
+
 object Client extends Application
 {
-  val client = new Client with Publisher
+  val client = new Client with Publisher with TestTeam
   client.run
 }

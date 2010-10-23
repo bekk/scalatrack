@@ -1,5 +1,6 @@
+import _root_.no.bekk.scala.Chalange
 
 trait Chalanges
 {
-  val chalanges = Map("tester"->"svar")
+  val chalanges = List(new Chalange("tester","svar"))
 }
