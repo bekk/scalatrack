@@ -1,7 +1,5 @@
 package no.bekk.scala
 
-import _root_.no.bekk.scala.{Chalange, Team}
-
 trait ScoreBoardService
 {
   def chalangeCompleted(team:Team, chalange: Chalange)

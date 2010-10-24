@@ -1,5 +1,5 @@
 import _root_.messages._
-import _root_.no.bekk.scala.{PrintlineScoreBoardService, ScoreBoardService, Chalange, Team}
+import _root_.no.bekk.scala._
 import org.scalatest.{FlatSpec, BeforeAndAfterEach}
 import org.scalatest.matchers.ShouldMatchers
 import se.scalablesolutions.akka.actor.Actor._

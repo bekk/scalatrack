@@ -1,4 +1,4 @@
-import _root_.no.bekk.scala.Chalange
+package no.bekk.scala
 
 trait Chalanges
 {
