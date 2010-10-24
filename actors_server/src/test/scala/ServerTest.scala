@@ -64,11 +64,13 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
   }
 
   it should "update the score board" in{
-    var scoreboardCalled = false
+    var scoreBoardTeam:Team = null;
+    var scoreBoardChalange: Chalange = null
     class TestScoreBoard extends ScoreBoardService
     {
       def chalangeCompleted(teamet: no.bekk.scala.Team, chalange:no.bekk.scala.Chalange) = {
-        scoreboardCalled = true
+        scoreBoardTeam = teamet;
+        scoreBoardChalange = chalange;
       }
     }
     trait TestScoreBoardService{
@@ -79,6 +81,7 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     var chalange = server !! MoreChalanges(team)
     server !! Answer(team, chalange.get.asInstanceOf[Question], "answer")
 
-    scoreboardCalled should be (true)
+    scoreBoardTeam should equal(team)
+    scoreBoardChalange should equal(new Chalange(chalange.get.asInstanceOf[Question].question, "answer"))
   }
 }
