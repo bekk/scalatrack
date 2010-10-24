@@ -1,5 +1,5 @@
 import _root_.messages._
-import _root_.no.bekk.scala.Team
+import _root_.no.bekk.scala.{PrintlineScoreBoardService, ScoreBoardService, Chalange, Team}
 import org.scalatest.{FlatSpec, BeforeAndAfterEach}
 import org.scalatest.matchers.ShouldMatchers
 import se.scalablesolutions.akka.actor.Actor._
@@ -19,11 +19,11 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
   val team = new Team("test")
   
   override def beforeEach={
-    server = actorOf(new Server with TestChalanges).start    
+    server = actorOf(new Server with TestChalanges with PrintlineScoreBoardService).start    
   }
 
   "As a client the server" should "give a chalange when you ask for one" in {
-    server = actorOf(new Server with Chalanges).start
+    server = actorOf(new Server with Chalanges with PrintlineScoreBoardService).start
     val chalange = server !! MoreChalanges(team)
 
     chalange should be (Some(Question("tester")))
@@ -61,5 +61,24 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     chalangeToTwo = server !! MoreChalanges(new Team("Two"))
 
     chalangeToOne should equal(chalangeToTwo)
+  }
+
+  it should "update the score board" in{
+    var scoreboardCalled = false
+    class TestScoreBoard extends ScoreBoardService
+    {
+      def chalangeCompleted(teamet: no.bekk.scala.Team, chalange:no.bekk.scala.Chalange) = {
+        scoreboardCalled = true
+      }
+    }
+    trait TestScoreBoardService{
+      val scoreBoard = new TestScoreBoard
+    }
+
+    server = actorOf(new Server with TestChalanges with TestScoreBoardService).start 
+    var chalange = server !! MoreChalanges(team)
+    server !! Answer(team, chalange.get.asInstanceOf[Question], "answer")
+
+    scoreboardCalled should be (true)
   }
 }

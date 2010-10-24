@@ -1,11 +1,13 @@
 import _root_.messages._
-import _root_.no.bekk.scala.Team
+import _root_.no.bekk.scala._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 abstract class Server extends Actor{
-  val chalanges: List[no.bekk.scala.Chalange];
+  val chalanges: List[Chalange];
   var teamChalanges = Map[Team, Int]();
+
+  val scoreBoard : ScoreBoardService;
   
   private def nextChalange(team:Team) = {
     teamChalanges.get(team) match {
@@ -23,21 +25,23 @@ abstract class Server extends Actor{
 
   }
 
-  def handleAnswer(chalange:Question, answer:String)={
-    if(chalanges.exists(_.equals(new no.bekk.scala.Chalange(chalange.question, answer))))
+  def handleAnswer(team: Team, chalange:Question, answer:String)={
+    val answeredChalange: Chalange = new no.bekk.scala.Chalange(chalange.question, answer)
+    if(chalanges.exists(_.equals(answeredChalange))){
+      scoreBoard.chalangeCompleted(team, answeredChalange)
       Correct()
-    else
+    } else
       Wrong()
   }
 
   def receive={
     case x@MoreChalanges(team) => self.reply(Question(nextChalange(team).question))
-    case Answer(team, chalange, answer) => self.reply(handleAnswer(chalange, answer)) 
+    case Answer(team, chalange, answer) => self.reply(handleAnswer(team, chalange, answer)) 
   }
 }
 
 
 object Server extends Application{
   RemoteNode.start("localhost", 9999)
-  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges))
+  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
 }
