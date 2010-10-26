@@ -1,12 +1,56 @@
 <lift:surround with="default" at="content">
-  <h2>Welcome to your project!</h2>
+  <h2>Velkommen til scala-tracket!</h2>
 
     <p>
+        <div>
+            <label>Server:</label><span>servernavn</span>
+        </div>
+        <div>
+            <label>Port:</label><span>portnummer</span>
+        </div>
+    </p>
+
+    <div>
         comet:
         <lift:comet type='Leret' >
             <msg:message/>
         </lift:comet>
-    </p>
+    </div>
+
+    <div class="clearer"></div>
+    <div class="oppgaver">
+        <div class="oppgaver bar">
+            <div class="header">
+                <h2>Oppgaver</h2>
+            </div>
+            <div class="oppgave">
+                <h4>Ping - pong  </h4>
+                Svar "pong" på ping
+            </div>
+            <div class="oppgave">S-1</div>
+            <div class="oppgave">S-1</div>
+            <div class="oppgave">S-1</div>
+            <div class="oppgave">S-1</div>
+            <div class="oppgave">S-1</div>
+            <div class="oppgave">S-1</div>
+            
+        </div>
+
+        <div class="team bar">
+            <div class="team header">
+                <h2>Test team</h2>
+            </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+            <div class="oppgave"> Feil </div>
+
+        </div>
+    </div>
 
 </lift:surround>
 
