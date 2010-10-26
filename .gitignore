@@ -3,9 +3,15 @@ actors_server/project/build/target/
 actors_server/logs/
 actors_server/lib
 actors_server/lib_managed/
-.idea/
-actors_server/*.iml
+
 target/
 actors_server/project/plugins/project/
 actors_server/project/plugins/src_managed/
 lib_managed/
+
+.idea/
+*.iml
+
+*.db
+.gitignore~
+
