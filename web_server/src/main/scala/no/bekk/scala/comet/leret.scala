@@ -3,6 +3,7 @@
 
 package no.bekk.scala.comet
 
+import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, CompletedChallenge}
 import net.liftweb._
 import http._
 import SHtml._ 
@@ -18,50 +19,34 @@ import se.scalablesolutions.akka.remote._
 
 class Leret extends CometActor with CometListener {
 
+  startAkkaServer
+
   def registerWith = LeretServer
-	
-	// The following specifies a default prefix
+
 	override def defaultPrefix = Full("msg") 
 	
-	// Intial bindings
 	def render = bind("message" -> <span id="message">test</span>)
 	
-	// this is called 10sec after the instance is created
 
-  RemoteNode.start("localhost", 9999)
-  RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with CometServerScoreboardProvider))
-	
+  def startAkkaServer ={
+    RemoteNode.start("localhost", 9999)
+    RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with CometServerScoreboardProvider))
+  }
+
 	override def lowPriority: PartialFunction[Any,Unit] = {
     case m: List[CompletedChallenge] => partialUpdate(SetHtml("message", <span>hei sveis : {m}</span>))
-
-    case x@_ => println("frostår ingen ting " + x)
 	}
 }
-case object Message
-case class CompletedChallenge(val team:Team, val chalange: Challenge )
-
 
 object LeretServer extends LiftActor with ListenerManager {
-   private var messages = List[CompletedChallenge]()
+   private var completedChallenges = List[CompletedChallenge]()
 
-   def createUpdate = messages
+   def createUpdate = completedChallenges
 
    override def lowPriority = {
     case completedChallenge@CompletedChallenge(_,_)=> {
-      messages ::= completedChallenge 
+      completedChallenges ::= completedChallenge
       updateListeners()
     }
    }
-}
-
-trait CometServerScoreboardProvider 
-{
-  val scoreBoard = new CometServerScoreboardService
-}
-
-class CometServerScoreboardService extends ScoreBoardService
-{
-  def chalangeCompleted(team: Team, challenge: Challenge) = {
-    LeretServer ! new CompletedChallenge(team, challenge)
-  }
 }
