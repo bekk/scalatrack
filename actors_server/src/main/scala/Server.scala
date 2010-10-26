@@ -1,28 +1,27 @@
 package no.bekk.scala
 
-import _root_.messages._
 import _root_.no.bekk.scala._
 import _root_.no.bekk.scala.messages._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 abstract class Server extends Actor{
-  val chalanges: List[Chalange];
-  var teamChalanges = Map[Team, Int]();
+  val challenges: List[Challenge];
+  var teamChallenges = Map[Team, Int]();
 
   val scoreBoard : ScoreBoardService;
   
-  private def nextChalange(team:Team) = {
-    teamChalanges.get(team) match {
+  private def nextChallenge(team:Team) = {
+    teamChallenges.get(team) match {
       case None => {
-        val next = chalanges(0)
-        teamChalanges = teamChalanges + ((team, 1))
+        val next = challenges(0)
+        teamChallenges = teamChallenges + ((team, 1))
         next
       }
-      case Some(chalange) => {
-        println(chalange+ " i liste " + chalanges)
-        val next = chalanges(chalange)
-        teamChalanges = teamChalanges + ((team, chalange +1))
+      case Some(challenge) => {
+        println(challenge+ " i liste " + challenges)
+        val next = challenges(challenge)
+        teamChallenges = teamChallenges + ((team, challenge +1))
         next
       }
     }
@@ -30,17 +29,17 @@ abstract class Server extends Actor{
   }
 
   def handleAnswer(team: Team, chalange:Question, answer:String)={
-    val answeredChalange: Chalange = new no.bekk.scala.Chalange(chalange.question, answer)
-    if(chalanges.exists(_.equals(answeredChalange))){
-      scoreBoard.chalangeCompleted(team, answeredChalange)
+    val answeredChallenge = new Challenge(chalange.question, answer)
+    if(challenges.exists(_.equals(answeredChallenge))){
+      scoreBoard.chalangeCompleted(team, answeredChallenge)
       Correct()
     } else
       Wrong()
   }
 
   def receive={
-    case MoreChalanges(team) => self.reply(Question(nextChalange(team).question))
-    case Answer(team, chalange, answer) => self.reply(handleAnswer(team, chalange, answer)) 
+    case MoreChallenges(team) => self.reply(Question(nextChallenge(team).question))
+    case Answer(team, challenge, answer) => self.reply(handleAnswer(team, challenge, answer))
   }
 }
 
@@ -48,6 +47,6 @@ abstract class Server extends Actor{
 object Server {
   def main(args : Array[String])= {
     RemoteNode.start("localhost", 9999)
-    RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
+    RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with PrintlineScoreBoardService))
   }
 }

@@ -1,6 +1,6 @@
 package no.bekk.scala
 
-trait Chalanges
+trait Challenges
 {
-  val chalanges = List(new Chalange("tester","svar"), new Chalange("tester2","svar"), new Chalange("tester3","svar"))
+  val challenges = List(new Challenge("tester","svar"), new Challenge("tester2","svar"), new Challenge("tester3","svar"))
 }

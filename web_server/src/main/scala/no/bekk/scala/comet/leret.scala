@@ -29,43 +29,39 @@ class Leret extends CometActor with CometListener {
 	// this is called 10sec after the instance is created
 
   RemoteNode.start("localhost", 9999)
-  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with CometServerScoreboardService))
+  RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with CometServerScoreboardProvider))
 	
 	override def lowPriority: PartialFunction[Any,Unit] = {
-		case Message => {
-      println("ping message received")
-			partialUpdate(SetHtml("message", Str(timeNow.toString)))
-			ActorPing.schedule(this, Message, 1000L)
-		}
-
-    case m: List[String] => partialUpdate(SetHtml("message", <span>hei sveis : {m}</span>))
+    case m: List[CompletedChallenge] => partialUpdate(SetHtml("message", <span>hei sveis : {m}</span>))
 
     case x@_ => println("frostår ingen ting " + x)
 	}
 }
 case object Message
+case class CompletedChallenge(val team:Team, val chalange: Challenge )
 
 
 object LeretServer extends LiftActor with ListenerManager {
-   private var messages = List("Welcome")
+   private var messages = List[CompletedChallenge]()
 
    def createUpdate = messages
 
    override def lowPriority = {
-    case s: String => messages ::= s ; updateListeners()
+    case completedChallenge@CompletedChallenge(_,_)=> {
+      messages ::= completedChallenge 
+      updateListeners()
+    }
    }
 }
 
-trait CometServerScoreboardService 
+trait CometServerScoreboardProvider 
 {
-  val scoreBoard = new CometServerScoreboard
+  val scoreBoard = new CometServerScoreboardService
 }
 
-class CometServerScoreboard extends ScoreBoardService
+class CometServerScoreboardService extends ScoreBoardService
 {
-  def chalangeCompleted(team: Team, chalange: Chalange) = {
-    val msg = "team " + team + " solved " + chalange
-    println(msg)
-    LeretServer ! msg
+  def chalangeCompleted(team: Team, challenge: Challenge) = {
+    LeretServer ! new CompletedChallenge(team, challenge)
   }
 }

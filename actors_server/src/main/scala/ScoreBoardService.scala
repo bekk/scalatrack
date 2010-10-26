@@ -2,7 +2,7 @@ package no.bekk.scala
 
 trait ScoreBoardService
 {
-  def chalangeCompleted(team:Team, chalange: Chalange)
+  def chalangeCompleted(team:Team, chalange: Challenge)
 }
 
 trait PrintlineScoreBoardService
@@ -12,5 +12,5 @@ trait PrintlineScoreBoardService
 
 class PrintlineScoreBoard extends ScoreBoardService
 {
-  def chalangeCompleted(team: Team, chalange: Chalange) = println("completed by " + team + ", " + chalange)
+  def chalangeCompleted(team: Team, chalange: Challenge) = println("completed by " + team + ", " + chalange)
 }

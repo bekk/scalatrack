@@ -20,7 +20,7 @@ abstract class Client
 
     println("remote er " + remote)
 
-    val chalange = remote !! MoreChalanges(team)
+    val chalange = remote !! MoreChallenges(team)
     println("received " + chalange)
 
     chalange match {
