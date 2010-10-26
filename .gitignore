@@ -3,7 +3,7 @@ actors_server/project/build/target/
 actors_server/logs/
 actors_server/lib
 actors_server/lib_managed/
-actors_server/.idea/
+.idea/
 actors_server/*.iml
 target/
 actors_server/project/plugins/project/

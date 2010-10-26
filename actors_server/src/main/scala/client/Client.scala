@@ -1,5 +1,6 @@
-import _root_.messages.{Answer, Question, MoreChalanges}
-import _root_.no.bekk.scala.Team
+package no.bekk.scala
+
+import no.bekk.scala.messages._
 import se.scalablesolutions.akka.actor.Actor
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._

@@ -1,5 +1,8 @@
+package no.bekk.scala
+
 import _root_.messages._
 import _root_.no.bekk.scala._
+import _root_.no.bekk.scala.messages._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 

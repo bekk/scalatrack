@@ -12,6 +12,9 @@ import net.liftweb.actor._
 import net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds.{SetHtml}
 import net.liftweb.http.js.JE.Str
+import no.bekk.scala._
+import se.scalablesolutions.akka.actor._
+import se.scalablesolutions.akka.remote._
 
 class Leret extends CometActor {
 	
@@ -24,6 +27,9 @@ class Leret extends CometActor {
 	// this is called 10sec after the instance is created
 	ActorPing.schedule(this, Message, 10000L)
   println("ping started")
+
+  RemoteNode.start("localhost", 9999)
+  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
 	
 	override def lowPriority: PartialFunction[Any,Unit] = {
 		case Message => {

@@ -1,6 +1,6 @@
 import sbt._
 
-class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
+class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaProject {
   val mavenLocal = "Local Maven Repository" at
   "file://"+Path.userHome+"/.m2/repository"
 
@@ -11,6 +11,8 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
   "http://scala-tools.org/repo-releases/"
 
   val liftVersion = "2.1-SNAPSHOT"
+
+  val malinf = "no.bekk" %% "maling" % "0.1"
 
   override def libraryDependencies = Set(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",

@@ -1,4 +1,4 @@
-package messages
+package no.bekk.scala.messages
 
 import _root_.no.bekk.scala.Team
 import se.scalablesolutions.akka.actor.ActorRef
