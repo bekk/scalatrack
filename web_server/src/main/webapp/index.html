@@ -23,33 +23,23 @@
             <div class="header">
                 <h2>Oppgaver</h2>
             </div>
-            <div class="oppgave">
-                <h4>Ping - pong  </h4>
-                Svar "pong" på ping
-            </div>
-            <div class="oppgave">S-1</div>
-            <div class="oppgave">S-1</div>
-            <div class="oppgave">S-1</div>
-            <div class="oppgave">S-1</div>
-            <div class="oppgave">S-1</div>
-            <div class="oppgave">S-1</div>
-            
+            <lift:Oppgaver.list>
+                <div class="oppgave">
+                    <h4><op:rowHeader/></h4>
+                </div>
+            </lift:Oppgaver.list>
         </div>
 
-        <div class="team bar">
-            <div class="team header">
-                <h2>Test team</h2>
+        <lift:Team.status>
+            <div class="team bar">
+                <div class="team header">
+                    <h2><team:name/></h2>
+                </div>
+                <team:oppgaver>
+                    <div class="oppgave"><oppgave:status/></div>
+                </team:oppgaver>
             </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-            <div class="oppgave"> Feil </div>
-
-        </div>
+        </lift:Team.status>
     </div>
 
 </lift:surround>

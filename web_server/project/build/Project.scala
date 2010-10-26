@@ -14,6 +14,8 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaPr
 
   val malinf = "no.bekk" %% "maling" % "0.1"
 
+  val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
+
   override def libraryDependencies = Set(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",
     "net.liftweb" %% "lift-testkit" % liftVersion % "compile->default",
