@@ -35,6 +35,7 @@ class TeamSnippetTests  extends FlatSpec with ShouldMatchers with BeforeAndAfter
     val snippet = new TeamSnippet with TestTeamProvider
 
     snippet.status(xml).toString should include("feil")
+    snippet.status(xml).toString should include("riktig")
 
   }
 }
@@ -47,5 +48,8 @@ trait TestTeamProvider
 class TestTeamService extends TeamService
 {
   def listTeams = List(new no.bekk.scala.Team("Team name"))
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])] = List((new Question("test"), None))
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])] =
+    (new Question("test"), None) ::
+            (new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) ::
+              Nil
 }
