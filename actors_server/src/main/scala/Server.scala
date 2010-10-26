@@ -19,9 +19,12 @@ abstract class Server extends Actor{
         next
       }
       case Some(challenge) => {
-        println(challenge+ " i liste " + challenges)
         val next = challenges(challenge)
-        teamChallenges = teamChallenges + ((team, challenge +1))
+        if(challenge +1 < challenges.length)
+          teamChallenges = teamChallenges + ((team, challenge +1))
+        else
+          teamChallenges = teamChallenges + ((team, 0))
+        
         next
       }
     }

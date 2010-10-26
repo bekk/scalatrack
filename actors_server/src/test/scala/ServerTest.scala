@@ -9,8 +9,8 @@ import se.scalablesolutions.akka.actor._
 trait TestChallenges
 {
   val challenges = List(
-    new Challenge("chalange", "answer"),
-    new Challenge("chalange2", "answer")
+    new Challenge("challenge", "answer"),
+    new Challenge("challenge2", "answer")
   )
 }
 
@@ -23,19 +23,26 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     server = actorOf(new Server with TestChallenges with PrintlineScoreBoardService).start
   }
 
-  "As a client the server" should "give a chalange when you ask for one" in {
+  "As a client the server" should "give a challenge when you ask for one" in {
     server = actorOf(new Server with Challenges with PrintlineScoreBoardService).start
     val chalange = server !! MoreChallenges(team)
 
     chalange should be (Some(Question("tester")))
   }
 
-  it should "give diffrent chalanges" in {
-    val chalange = server !! MoreChallenges(team)
-    chalange should be (Some(Question("chalange")))
+  it should "give diffrent challenges" in {
+    val challenge = server !! MoreChallenges(team)
+    challenge should be (Some(Question("challenge")))
 
-    val chalange2 = server !! MoreChallenges(team)
-    chalange2 should be (Some(Question("chalange2")))
+    val challenge2 = server !! MoreChallenges(team)
+    challenge2 should be (Some(Question("challenge2")))
+  }
+
+  it should "repeate the diffrent challenges" in{
+    server !! MoreChallenges(team) should not be (None)
+    server !! MoreChallenges(team) should not be (None)
+    val firstQuestion = Some(new Question("challenge"))
+    server !! MoreChallenges(team) should equal(firstQuestion)
   }
 
   it should "return wrong it answered wrong" in {
@@ -52,7 +59,7 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     answerStatus should be (Some(Correct()))
   }
 
-  it should "give all chalanges to all clients in turn" in {
+  it should "give all challenges to all clients in turn" in {
     var chalangeToOne = server !! MoreChallenges(new Team("One"))
     var chalangeToTwo = server !! MoreChallenges(new Team("Two"))
 
@@ -85,4 +92,7 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     scoreBoardTeam should equal(team)
     scoreBoardChalange should equal(new Challenge(chalange.get.asInstanceOf[Question].question, "answer"))
   }
+
+
+
 }
