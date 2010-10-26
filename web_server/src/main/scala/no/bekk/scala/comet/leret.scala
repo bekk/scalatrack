@@ -14,6 +14,7 @@ import net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds.{SetHtml}
 import net.liftweb.http.js.JE.Str
 import no.bekk.scala._
+import no.bekk.scala.messages._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
