@@ -1,1 +1,13 @@
 kjør sbt i actors_server.. done
+
+Program
+# Port en std j2ee stack til scala, lag for lag, gradvis mer avanserte scala features.
+## jpa
+## dto
+## service/logic lag
+
+# Kode en client til quiz appen
+## svar på en triviel melding "ping" -> "pong"
+## Gjør en triviel s-99 oppgave
+### Gjør vanskeligere s-99 oppgaver :D
+
