@@ -1,5 +1,6 @@
 import _root_.messages._
 import _root_.no.bekk.scala._
+
 import _root_.no.bekk.scala.messages._
 import org.scalatest.{FlatSpec, BeforeAndAfterEach}
 import org.scalatest.matchers.ShouldMatchers

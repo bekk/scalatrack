@@ -16,7 +16,9 @@ import no.bekk.scala._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
-class Leret extends CometActor {
+class Leret extends CometActor with CometListener {
+
+  def registerWith = LeretServer
 	
 	// The following specifies a default prefix
 	override def defaultPrefix = Full("msg") 
@@ -25,18 +27,45 @@ class Leret extends CometActor {
 	def render = bind("message" -> <span id="message">test</span>)
 	
 	// this is called 10sec after the instance is created
-	ActorPing.schedule(this, Message, 10000L)
-  println("ping started")
 
   RemoteNode.start("localhost", 9999)
-  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
+  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with CometServerScoreboardService))
 	
 	override def lowPriority: PartialFunction[Any,Unit] = {
 		case Message => {
       println("ping message received")
 			partialUpdate(SetHtml("message", Str(timeNow.toString)))
-			ActorPing.schedule(this, Message, 10000L)
+			ActorPing.schedule(this, Message, 1000L)
 		}
+
+    case m: List[String] => partialUpdate(SetHtml("message", <span>hei sveis : {m}</span>))
+
+    case x@_ => println("frostår ingen ting " + x)
 	}
 }
 case object Message
+
+
+object LeretServer extends LiftActor with ListenerManager {
+   private var messages = List("Welcome")
+
+   def createUpdate = messages
+
+   override def lowPriority = {
+    case s: String => messages ::= s ; updateListeners()
+   }
+}
+
+trait CometServerScoreboardService 
+{
+  val scoreBoard = new CometServerScoreboard
+}
+
+class CometServerScoreboard extends ScoreBoardService
+{
+  def chalangeCompleted(team: Team, chalange: Chalange) = {
+    val msg = "team " + team + " solved " + chalange
+    println(msg)
+    LeretServer ! msg
+  }
+}

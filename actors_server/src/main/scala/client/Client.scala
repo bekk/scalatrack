@@ -24,10 +24,9 @@ abstract class Client
     println("received " + chalange)
 
     chalange match {
-      case Some(x@Question(_)) => remote !! Answer(team, x, "hei")
+      case Some(x@Question(_)) => remote !! Answer(team, x, "svar")
       case _ => println("hva..")
     }
-
   }
 }
 

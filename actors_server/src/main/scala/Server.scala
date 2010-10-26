@@ -20,6 +20,7 @@ abstract class Server extends Actor{
         next
       }
       case Some(chalange) => {
+        println(chalange+ " i liste " + chalanges)
         val next = chalanges(chalange)
         teamChalanges = teamChalanges + ((team, chalange +1))
         next
@@ -38,13 +39,15 @@ abstract class Server extends Actor{
   }
 
   def receive={
-    case x@MoreChalanges(team) => self.reply(Question(nextChalange(team).question))
+    case MoreChalanges(team) => self.reply(Question(nextChalange(team).question))
     case Answer(team, chalange, answer) => self.reply(handleAnswer(team, chalange, answer)) 
   }
 }
 
 
-object Server extends Application{
-  RemoteNode.start("localhost", 9999)
-  RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
+object Server {
+  def main(args : Array[String])= {
+    RemoteNode.start("localhost", 9999)
+    RemoteNode.register("Server", Actor.actorOf(new Server with Chalanges with PrintlineScoreBoardService))
+  }
 }
