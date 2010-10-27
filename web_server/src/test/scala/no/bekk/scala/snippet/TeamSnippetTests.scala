@@ -39,21 +39,40 @@ class TeamSnippetTests  extends FlatSpec with ShouldMatchers with BeforeAndAfter
 
   }
 
-  it should "set class to solved" in{
-    val snippet = new TeamSnippet with TestTeamProvider
+  it should "set class to solved when challenges are solved" in{
+    val snippet = new TeamSnippet with TestSuccessTeamProvider
 
     snippet.status(xml).toString should include("class=\"oppgave solved\"")
+    snippet.status(xml).toString should not include("class=\"oppgave\"")    
+
+  }
+
+  it should "set class to nothing when challenges are'nt solved" in{
+    val snippet = new TeamSnippet with TestFailsTeamProvider
+
+    snippet.status(xml).toString should include("class=\"oppgave\"")
   }
 }
 
 trait TestTeamProvider
 { self:TeamSnippet =>
-  override val teamServices = new TestTeamService
+  override val teamServices = new TestTeamService((new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) ::(new Question("test"), None) :: Nil)
 }
 
-class TestTeamService extends TeamService
+
+trait TestFailsTeamProvider
+{ self:TeamSnippet =>
+  override val teamServices = new TestTeamService((new Question("test"), None) :: Nil)
+}
+
+trait TestSuccessTeamProvider
+{ self:TeamSnippet =>
+  override val teamServices = new TestTeamService((new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) :: Nil)
+}
+
+class TestTeamService(val questions:List[(Question, Option[Answer])]) extends TeamService
 {
   def listTeams = List(new no.bekk.scala.Team("Team name"))
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])] =
-    (new Question("test"), None) ::(new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) :: Nil
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])] = questions
+
 }

@@ -21,6 +21,11 @@
     vertical-align: top;
 }
 
+.oppgave.solved
+{
+    background-color: green;
+}
+
 .clearer
 {
     clear:both;
