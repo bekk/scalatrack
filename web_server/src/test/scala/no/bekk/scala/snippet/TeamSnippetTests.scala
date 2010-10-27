@@ -18,7 +18,7 @@ class TeamSnippetTests  extends FlatSpec with ShouldMatchers with BeforeAndAfter
         <h2><team:name/></h2>
     </div>
     <team:oppgaver>
-        <div class="oppgave"><oppgave:status/></div>
+        <div oppgave:class="oppgave"><oppgave:status/></div>
     </team:oppgaver>
   </div>;
 
@@ -38,6 +38,12 @@ class TeamSnippetTests  extends FlatSpec with ShouldMatchers with BeforeAndAfter
     snippet.status(xml).toString should include("riktig")
 
   }
+
+  it should "set class to solved" in{
+    val snippet = new TeamSnippet with TestTeamProvider
+
+    snippet.status(xml).toString should include("class=\"oppgave solved\"")
+  }
 }
 
 trait TestTeamProvider
@@ -49,7 +55,5 @@ class TestTeamService extends TeamService
 {
   def listTeams = List(new no.bekk.scala.Team("Team name"))
   def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])] =
-    (new Question("test"), None) ::
-            (new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) ::
-              Nil
+    (new Question("test"), None) ::(new Question("Riktig"), Some(new Answer(new Team("test"), new Question("?"), "riktig"))) :: Nil
 }
