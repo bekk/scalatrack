@@ -16,7 +16,7 @@ object TeamRegister extends TeamService
   def registerCompletedChalange(team: Team, question:Question, answer: Option[String])={
     val teamList = register.get(team) match {
       case None => register = register + ((team, List((question, answer)) ))
-      case Some(list) => register = register + ((team, list ++ List(((question, answer))) ))
+      case Some(list) =>register = register+ ((team, list.filterNot(_._1.equals(question))  ++ List(((question, answer))) ))
     }
   }
 

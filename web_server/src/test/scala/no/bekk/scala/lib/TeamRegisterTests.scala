@@ -27,5 +27,14 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
       )
   }
 
+  it should "not keep more than one question per team" in {
+    TeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
+    TeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
+
+    TeamRegister.statusOfQuestionForTeam(team) should be(
+        (new Question("a"), Some("a")) :: Nil
+      )
+  }
+
   override def afterEach() = TeamRegister.clear 
 }

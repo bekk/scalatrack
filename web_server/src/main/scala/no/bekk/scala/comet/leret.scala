@@ -3,6 +3,7 @@ package no.bekk.scala.comet
 import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, CompletedChallenge}
 import net.liftweb._
 import http._
+import scala.xml._
 import SHtml._ 
 import net.liftweb.common.{Box, Full}
 import net.liftweb.util._
@@ -25,7 +26,7 @@ class Leret extends CometActor with CometListener {
 
 	override def defaultPrefix = Full("msg") 
 	
-	def render = bind("message" -> <span id="message">test{new Date}</span>)
+	def render = bind("message" -> <span id="message">test{new Date()}</span>)
 	
 
   def startAkkaServer ={
@@ -34,7 +35,7 @@ class Leret extends CometActor with CometListener {
   }
 
 	override def lowPriority: PartialFunction[Any,Unit] = {
-    case _ => reRender(true)
+    case _ => println("reRender"); reRender(false)
 	}
 }
 
