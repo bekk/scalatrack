@@ -10,36 +10,33 @@
         </div>
     </p>
 
-    <div>
-        comet:
-        <lift:comet type='Leret' >
-            <msg:message/>
-        </lift:comet>
-    </div>
 
-    <div class="clearer"></div>
     <div class="oppgaver">
-        <div class="oppgaver bar">
-            <div class="header">
-                <h2>Oppgaver</h2>
-            </div>
-            <lift:Oppgaver.list>
-                <div class="oppgave">
-                    <h4><op:rowHeader/></h4>
+        <lift:comet type='Leret' >
+            <span>{new Date}</span>
+            <div class="clearer"></div>
+            <div class="oppgaver bar">
+                <div class="header">
+                    <h2>Oppgaver</h2>
                 </div>
-            </lift:Oppgaver.list>
-        </div>
+                <lift:Oppgaver.list>
+                    <div class="oppgave">
+                        <h4><op:rowHeader/></h4>
+                    </div>
+                </lift:Oppgaver.list>
+            </div>
 
-        <lift:TeamSnippet.status>
-            <div class="team bar">
-                <div class="team header">
-                    <h2><team:name/></h2>
+            <lift:TeamSnippet.status>
+                <div class="team bar">
+                    <div class="team header">
+                        <h2><team:name/></h2>
+                    </div>
+                    <team:oppgaver>
+                        <div oppgave:class="oppgave"><oppgave:status/></div>
+                    </team:oppgaver>
                 </div>
-                <team:oppgaver>
-                    <div oppgave:class="oppgave"><oppgave:status/></div>
-                </team:oppgaver>
-            </div>
-        </lift:TeamSnippet.status>
+            </lift:TeamSnippet.status>
+        </lift:comet>
     </div>
 
 </lift:surround>

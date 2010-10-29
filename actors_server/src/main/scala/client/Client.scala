@@ -1,6 +1,7 @@
 package no.bekk.scala
 
 import no.bekk.scala.messages._
+import scala.actors.Actor.loop
 import se.scalablesolutions.akka.actor.Actor
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
@@ -20,13 +21,16 @@ abstract class Client
 
     println("remote er " + remote)
 
-    val chalange = remote !! MoreChallenges(team)
-    println("received " + chalange)
-
-    chalange match {
-      case Some(x@Question(_)) => remote !! Answer(team, x, "svar")
-      case _ => println("hva..")
+    while(true){
+       remote !! MoreChallenges(team) match {
+         case Some(x@Question(_)) => {
+           println("question " + x)
+           println(remote !! Answer(team, x, "svar"))
+         }
+         case x@None => println("hva ... " + x)
+       }
     }
+
   }
 }
 

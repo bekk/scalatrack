@@ -1,6 +1,3 @@
-
-
-
 package no.bekk.scala.comet
 
 import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, CompletedChallenge}
@@ -18,6 +15,8 @@ import no.bekk.scala.messages._
 import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
+import java.util.Date
+
 class Leret extends CometActor with CometListener {
 
   startAkkaServer
@@ -26,7 +25,7 @@ class Leret extends CometActor with CometListener {
 
 	override def defaultPrefix = Full("msg") 
 	
-	def render = bind("message" -> <span id="message">test</span>)
+	def render = bind("message" -> <span id="message">test{new Date}</span>)
 	
 
   def startAkkaServer ={
@@ -35,7 +34,7 @@ class Leret extends CometActor with CometListener {
   }
 
 	override def lowPriority: PartialFunction[Any,Unit] = {
-    case m: List[CompletedChallenge] => partialUpdate(SetHtml("message", <span>hei sveis : {m}</span>))
+    case _ => reRender(true)
 	}
 }
 
