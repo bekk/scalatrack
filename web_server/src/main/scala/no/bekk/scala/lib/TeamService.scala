@@ -7,5 +7,5 @@ import no.bekk.scala.messages._
 trait TeamService
 {
   def listTeams:List[Team];
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Answer])];
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[String])];
 }

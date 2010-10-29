@@ -11,16 +11,16 @@ class TeamSnippet
 {
   val teamServices: TeamService = TeamRegister 
 
-  def textForAnswer(answer:Option[Answer]) = {
+  def textForAnswer(answer:Option[String]) = {
       answer match {
           case None => "feil"
           case Some(_) => "riktig"
         }
   }
 
-  def classForAnswer(answer:Option[Answer])={
+  def classForAnswer(answer:Option[String])={
     answer match{
-      case None=> "oppgave"
+      case None=> "oppgave failed"
       case Some(_) => "oppgave solved"
     }
   }
