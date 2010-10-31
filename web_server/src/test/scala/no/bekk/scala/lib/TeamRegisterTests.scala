@@ -12,7 +12,7 @@ import net.liftweb.util.BindHelpers._
 class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
   val team = new Team("test")
 
-  "Team register" should "keep track of partisipating teams" in {
+  "Team register" should "keep track of teams, answers" in {
 
     TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
     TestTeamRegister.statusOfQuestionForTeam(team) should be( List((new Question("a"), Some("a")), (new Question("b"), None)) )
@@ -44,6 +44,19 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
     TestTeamRegister.statusOfQuestionForTeam(newTeam) should be(
         (new Question("a"), Some("a")) :: (new Question("b"), None) :: Nil
       )
+  }
+
+  it should "keep track of all teams that have answerd" in {
+
+    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
+    TestTeamRegister.listTeams should be (team ::Nil)    
+
+    val newTeam = new Team("aslak")
+
+    TestTeamRegister.registerCompletedChalange(newTeam, new Question("a"), Some("a"))
+
+    TestTeamRegister.listTeams should be (team :: Team("aslak") ::Nil)
+
   }
 
   object TestTeamRegister extends TeamRegister with TwoTestChallenges
