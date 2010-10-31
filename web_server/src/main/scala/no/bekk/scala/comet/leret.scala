@@ -22,12 +22,9 @@ class Leret extends CometActor with CometListener {
 
   startAkkaServer
 
-  def registerWith = LeretServer
+  def render = bind("nothing" -> "test")
 
-	override def defaultPrefix = Full("msg") 
-	
-	def render = bind("message" -> <span id="message">test{new Date()}</span>)
-	
+  def registerWith = LeretServer
 
   def startAkkaServer ={
     RemoteNode.start("localhost", 9999)
@@ -35,18 +32,16 @@ class Leret extends CometActor with CometListener {
   }
 
 	override def lowPriority: PartialFunction[Any,Unit] = {
-    case _ => println("reRender"); reRender(false)
+    case _ => reRender(false)
 	}
 }
 
 object LeretServer extends LiftActor with ListenerManager {
-   private var completedChallenges = List[CompletedChallenge]()
 
-   def createUpdate = completedChallenges
+   def createUpdate = List()
 
    override def lowPriority = {
     case completedChallenge@CompletedChallenge(_,_)=> {
-      completedChallenges ::= completedChallenge
       updateListeners()
     }
    }

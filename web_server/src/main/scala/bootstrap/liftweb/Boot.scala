@@ -5,6 +5,7 @@ package bootstrap.liftweb
 import _root_.net.liftweb.http.{LiftRules, NotFoundAsTemplate, ParsePath}
 import _root_.net.liftweb.sitemap.{SiteMap, Menu, Loc}
 import _root_.net.liftweb.util.{ NamedPF }
+import se.scalablesolutions.akka.remote.RemoteNode
 
 
 class Boot {
@@ -25,5 +26,7 @@ class Boot {
     
     // set character encoding
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
+
+    LiftRules.unloadHooks.append(()=> RemoteNode.shutdown)
   }
 }
