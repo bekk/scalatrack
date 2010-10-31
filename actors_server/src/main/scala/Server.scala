@@ -7,31 +7,42 @@ import se.scalablesolutions.akka.remote._
 
 abstract class Server extends Actor{
   val challenges: List[Challenge];
+  val scoreBoard : ScoreBoardService;
+
   var teamChallenges = Map[Team, Int]();
 
-  val scoreBoard : ScoreBoardService;
-  
-  private def nextChallenge(team:Team) = {
-    teamChallenges.get(team) match {
-      case None => {
-        val next = challenges(0)
-        teamChallenges = teamChallenges + ((team, 1))
-        next
-      }
-      case Some(challenge) => {
-        val next = challenges(challenge)
-        if(challenge +1 < challenges.length)
-          teamChallenges = teamChallenges + ((team, challenge +1))
-        else
-          teamChallenges = teamChallenges + ((team, 0))
-        
-        next
-      }
+  private def nextChallenge(team:Team) : Challenge = {
+    def findFirstChallenge: Challenge = {
+      val next = challenges(0)
+      teamChallenges = teamChallenges + ((team, 1))
+      next
     }
 
+    def findNextChallenge(challenge: Int): Challenge = {
+      val next = challenges(challenge)
+      setNextChallenge(challenge)
+
+      next
+    }
+
+    def setNextChallenge(challenge:Int) {
+      if (challenge + 1 < challenges.length)
+        teamChallenges = teamChallenges + ((team, challenge + 1))
+      else
+        teamChallenges = teamChallenges + ((team, 0))
+    }
+
+    teamChallenges.get(team) match {
+      case None => {
+        findFirstChallenge
+      }
+      case Some(challenge) => {
+        findNextChallenge(challenge)
+      }
+    }
   }
 
-  def handleAnswer(team: Team, chalange:Question, answer:String)={
+  private def handleAnswer(team: Team, chalange:Question, answer:String):Verdict={
     val answeredChallenge = new Challenge(chalange.question, answer)
     if(challenges.exists(_.equals(answeredChallenge))){
       scoreBoard.chalangeCompleted(team, answeredChallenge)
@@ -50,6 +61,6 @@ abstract class Server extends Actor{
 object Server {
   def main(args : Array[String])= {
     RemoteNode.start("localhost", 9999)
-    RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with PrintlineScoreBoardService))
+    RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with PrintlineScoreBoardProvider))
   }
 }

@@ -7,15 +7,21 @@ import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 
-trait Publisher
+trait PublisherProvider
 {
   val publisher = RemoteClient.actorFor("Server", "localhost", 9999)
+}
+
+trait TestTeamProvider
+{
+  val team = new Team("test")
 }
 
 abstract class Client
 {
   val team:Team
-  val publisher: ActorRef;
+  val publisher: ActorRef
+  
   def run {
     val remote = publisher
 
@@ -25,7 +31,8 @@ abstract class Client
        remote !! MoreChallenges(team) match {
          case Some(x@Question(_)) => {
            println("question " + x)
-           println(remote !! Answer(team, x, "svar"))
+           val correct_? = remote !! Answer(team, x, "svar")
+           println(correct_?)
          }
          case x@None => println("hva ... " + x)
        }
@@ -34,13 +41,8 @@ abstract class Client
   }
 }
 
-trait TestTeam
-{
-  val team = new Team("test")
-}
-
 object Client extends Application
 {
-  val client = new Client with Publisher with TestTeam
+  val client = new Client with PublisherProvider with TestTeamProvider
   client.run
 }

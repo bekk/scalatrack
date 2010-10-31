@@ -20,11 +20,11 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
   val team = new Team("test")
   
   override def beforeEach={
-    server = actorOf(new Server with TestChallenges with PrintlineScoreBoardService).start
+    server = actorOf(new Server with TestChallenges with PrintlineScoreBoardProvider).start
   }
 
   "As a client the server" should "give a challenge when you ask for one" in {
-    server = actorOf(new Server with Challenges with PrintlineScoreBoardService).start
+    server = actorOf(new Server with Challenges with PrintlineScoreBoardProvider).start
     val chalange = server !! MoreChallenges(team)
 
     chalange should be (Some(Question("tester")))

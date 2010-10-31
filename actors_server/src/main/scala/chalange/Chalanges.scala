@@ -8,3 +8,5 @@ trait Challenges
     new Challenge("tester3","svar")
   )
 }
+
+case class Challenge(val question:String, val answer:String)

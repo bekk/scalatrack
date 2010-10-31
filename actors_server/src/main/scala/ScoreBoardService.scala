@@ -5,12 +5,12 @@ trait ScoreBoardService
   def chalangeCompleted(team:Team, chalange: Challenge)
 }
 
-trait PrintlineScoreBoardService
+trait PrintlineScoreBoardProvider
 {
-  val scoreBoard = new PrintlineScoreBoard
+  val scoreBoard = new PrintlineScoreBoardService
 }
 
-class PrintlineScoreBoard extends ScoreBoardService
+class PrintlineScoreBoardService extends ScoreBoardService
 {
   def chalangeCompleted(team: Team, chalange: Challenge) = println("completed by " + team + ", " + chalange)
 }
