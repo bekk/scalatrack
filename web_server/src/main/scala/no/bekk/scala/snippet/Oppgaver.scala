@@ -11,8 +11,8 @@ class Oppgaver
   val challengesList = ChallengesList()
 
   def list(seq: NodeSeq):NodeSeq={
-    challengesList.flatMap( challange =>
-       bind("op", seq, "rowHeader" -> challange.question )
+    challengesList.flatMap( challenge =>
+       bind("op", seq, "rowHeader" -> challenge.question )
     )
   }
 }

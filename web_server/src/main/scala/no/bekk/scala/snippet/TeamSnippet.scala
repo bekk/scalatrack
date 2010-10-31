@@ -1,6 +1,6 @@
 package no.bekk.scala.snippet
 
-import _root_.no.bekk.scala.lib.{TeamService, TeamRegister}
+import _root_.no.bekk.scala.lib.{TeamRegisterWithChallenges, TeamService, TeamRegister}
 import scala.xml.NodeSeq
 import net.liftweb.util.BindHelpers._
 import no.bekk.scala.messages._
@@ -9,7 +9,7 @@ import scala.Option._
 
 class TeamSnippet
 {
-  val teamServices: TeamService = TeamRegister 
+  val teamServices: TeamService = TeamRegisterWithChallenges
 
   def textForAnswer(answer:Option[String]) = {
       answer match {
