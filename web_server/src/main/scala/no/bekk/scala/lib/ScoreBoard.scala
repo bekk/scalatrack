@@ -14,6 +14,6 @@ class CometServerScoreboardService extends ScoreBoardService
 {
   def chalangeCompleted(team: Team, challenge: Challenge) = {
     TeamRegisterWithChallenges.registerCompletedChalange(team, new Question(challenge.question), Some(challenge.answer))    
-    LeretServer ! new CompletedChallenge(team, challenge)
+    LeretServer ! new ChangesToTheScoreboard()
   }
 }

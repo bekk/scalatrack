@@ -1,6 +1,6 @@
 package no.bekk.scala.comet
 
-import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, CompletedChallenge}
+import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, ChangesToTheScoreboard}
 import net.liftweb._
 import http._
 import scala.xml._
@@ -41,7 +41,7 @@ object LeretServer extends LiftActor with ListenerManager {
    def createUpdate = List()
 
    override def lowPriority = {
-    case completedChallenge@CompletedChallenge(_,_)=> {
+    case completedChallenge@ChangesToTheScoreboard()=> {
       updateListeners()
     }
    }

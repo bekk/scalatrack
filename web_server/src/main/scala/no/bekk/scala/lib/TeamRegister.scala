@@ -10,16 +10,27 @@ trait TeamRegister extends TeamService
 {
   val challenges: List[Challenge];
 
-  private var register : Map[Team, List[(Question, Option[String])] ]= Map()
+  private var teamsAnswers : Map[Team, List[(Question, Option[String])] ]= Map()
 
-  def listTeams = register.keys.toList
+  def listTeams = teamsAnswers.keys.toList
 
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[String])] = register.get(team) match {
-    case None => List()
-    case Some(list) => list
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[String])] =  {
+    teamsAnswers.get(team) match {
+      case None => List()
+      case Some(list) => list
+    }
   }
 
-  private def onlyAnswered(question: Question, answer:Option[String]):List[Tuple2[Question,Option[String]]] = {
+  def registerCompletedChalange(team: Team, question:Question, answer: Option[String])={
+    val teamList = teamsAnswers.get(team) match {
+      case None =>
+        teamsAnswers = teamsAnswers + ((team, firstAnswer(question, answer)))
+      case Some(list) =>
+        teamsAnswers = teamsAnswers+ ((team, newAnswer(list, question, answer)))
+    }
+  }
+
+  private def firstAnswer(question: Question, answer:Option[String]):List[(Question,Option[String])] = {
     challenges.map( challenge => {
       val q = new Question(challenge.question)
       if(q.equals(question))
@@ -39,16 +50,7 @@ trait TeamRegister extends TeamService
     })
   }
 
-  def registerCompletedChalange(team: Team, question:Question, answer: Option[String])={
-    val teamList = register.get(team) match {
-      case None =>
-        register = register + ((team, onlyAnswered(question, answer)))
-      case Some(list) =>
-        register = register+ ((team, newAnswer(list, question, answer)))
-    }
-  }
-
   def clear(){
-    register = Map()
+    teamsAnswers = Map()
   }
 }

@@ -29,9 +29,11 @@ class TeamSnippet
     teamServices.listTeams.flatMap(team => bind("team", seq,
       "name" -> team.name,
       "oppgaver" -> teamServices.statusOfQuestionForTeam(team).flatMap{
-          case  ((question, answer)) => bind("oppgave", chooseTemplate("team", "oppgaver", seq),
-            "status" -> textForAnswer(answer),
-            AttrBindParam("class" , classForAnswer(answer), "class"))
+          case  ((question, answer)) => {
+            bind("oppgave", chooseTemplate("team", "oppgaver", seq),
+              "status" -> textForAnswer(answer),
+              AttrBindParam("class" , classForAnswer(answer), "class"))
+          }
       }
     ))
 
