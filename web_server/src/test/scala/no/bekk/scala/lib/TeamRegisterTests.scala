@@ -14,46 +14,46 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
 
   "Team register" should "keep track of teams, answers" in {
 
-    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
-    TestTeamRegister.statusOfQuestionForTeam(team) should be( List((new Question("a"), Some("a")), (new Question("b"), None)) )
+    TestTeamRegister.registerCompletedChalange(team, new Question("a", ""), Some("a"))
+    TestTeamRegister.statusOfQuestionForTeam(team) should be( List((new Question("a", ""), Some("a")), (new Question("b", ""), None)) )
   }
 
   it should "keep track of multiple answers" in {
-    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
-    TestTeamRegister.registerCompletedChalange(team, new Question("b"), Some("b"))
+    TestTeamRegister.registerCompletedChalange(team, new Question("a", ""), Some("a"))
+    TestTeamRegister.registerCompletedChalange(team, new Question("b", ""), Some("b"))
 
     TestTeamRegister.statusOfQuestionForTeam(team) should be(
-        (new Question("a"), Some("a")) :: (new Question("b"), Some("b")) :: Nil
+        (new Question("a", ""), Some("a")) :: (new Question("b", ""), Some("b")) :: Nil
       )
   }
 
   it should "not keep more than one question per team" in {
-    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
-    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
+    TestTeamRegister.registerCompletedChalange(team, new Question("a", ""), Some("a"))
+    TestTeamRegister.registerCompletedChalange(team, new Question("a", ""), Some("a"))
 
     TestTeamRegister.statusOfQuestionForTeam(team) should be(
-        (new Question("a"), Some("a")) :: (new Question("b"), None) ::  Nil
+        (new Question("a", ""), Some("a")) :: (new Question("b", ""), None) ::  Nil
       )
   }
 
   it should "initalize all teams with all chalanges" in {
     val newTeam = new Team("aslak")
 
-    TestTeamRegister.registerCompletedChalange(newTeam, new Question("a"), Some("a"))
+    TestTeamRegister.registerCompletedChalange(newTeam, new Question("a", ""), Some("a"))
 
     TestTeamRegister.statusOfQuestionForTeam(newTeam) should be(
-        (new Question("a"), Some("a")) :: (new Question("b"), None) :: Nil
+        (new Question("a", ""), Some("a")) :: (new Question("b", ""), None) :: Nil
       )
   }
 
   it should "keep track of all teams that have answerd" in {
 
-    TestTeamRegister.registerCompletedChalange(team, new Question("a"), Some("a"))
+    TestTeamRegister.registerCompletedChalange(team, new Question("a", ""), Some("a"))
     TestTeamRegister.listTeams should be (team ::Nil)    
 
     val newTeam = new Team("aslak")
 
-    TestTeamRegister.registerCompletedChalange(newTeam, new Question("a"), Some("a"))
+    TestTeamRegister.registerCompletedChalange(newTeam, new Question("a", ""), Some("a"))
 
     TestTeamRegister.listTeams should be (team :: Team("aslak") ::Nil)
 
@@ -64,8 +64,8 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
   trait TwoTestChallenges extends Challenges
   {
     override val challenges = List(
-      new Challenge("a","a"),
-      new Challenge("b","b")
+      new Challenge("a", "", "a"),
+      new Challenge("b", "", "b")
     )
   }
 

@@ -10,18 +10,18 @@ trait TeamRegister extends TeamService
 {
   val challenges: List[Challenge];
 
-  private var teamsAnswers : Map[Team, List[(Question, Option[String])] ]= Map()
+  private var teamsAnswers : Map[Team, List[(Question, Option[Any])] ]= Map()
 
   def listTeams = teamsAnswers.keys.toList
 
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[String])] =  {
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Any])] =  {
     teamsAnswers.get(team) match {
       case None => List()
       case Some(list) => list
     }
   }
 
-  def registerCompletedChalange(team: Team, question:Question, answer: Option[String])={
+  def registerCompletedChalange(team: Team, question:Question, answer: Option[Any])={
     val teamList = teamsAnswers.get(team) match {
       case None =>
         teamsAnswers = teamsAnswers + ((team, firstAnswer(question, answer)))
@@ -30,9 +30,9 @@ trait TeamRegister extends TeamService
     }
   }
 
-  private def firstAnswer(question: Question, answer:Option[String]):List[(Question,Option[String])] = {
+  private def firstAnswer(question: Question, answer:Option[Any]):List[(Question,Option[Any])] = {
     challenges.map( challenge => {
-      val q = new Question(challenge.question)
+      val q = new Question(challenge.question, challenge.content)
       if(q.equals(question))
         ((question, answer))
       else
@@ -40,7 +40,7 @@ trait TeamRegister extends TeamService
     })
   }
 
-  private def newAnswer(previouseAnswers:List[(Question,Option[String])], question: Question, answer: Option[String]):List[(Question,Option[String])] =
+  private def newAnswer(previouseAnswers:List[(Question,Option[Any])], question: Question, answer: Option[Any]):List[(Question,Option[Any])] =
   {
     previouseAnswers.map(previouseAnswer =>{
       if(previouseAnswer._1.equals(question))

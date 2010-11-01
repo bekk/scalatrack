@@ -56,23 +56,23 @@ class TeamSnippetTests  extends FlatSpec with ShouldMatchers with BeforeAndAfter
 
 trait TestTeamProvider
 { self:TeamSnippet =>
-  override val teamServices = new TestTeamService((new Question("Riktig"), Some("riktig")) ::(new Question("test"), None) :: Nil)
+  override val teamServices = new TestTeamService((new Question("Riktig", ""), Some("riktig")) ::(new Question("test", ""), None) :: Nil)
 }
 
 
 trait TestFailsTeamProvider
 { self:TeamSnippet =>
-  override val teamServices = new TestTeamService((new Question("test"), None) :: Nil)
+  override val teamServices = new TestTeamService((new Question("test", ""), None) :: Nil)
 }
 
 trait TestSuccessTeamProvider
 { self:TeamSnippet =>
-  override val teamServices = new TestTeamService((new Question("Riktig"), Some("riktig")) :: Nil)
+  override val teamServices = new TestTeamService((new Question("Riktig", ""), Some("riktig")) :: Nil)
 }
 
-class TestTeamService(val questions:List[(Question, Option[String])]) extends TeamService
+class TestTeamService(val questions:List[(Question, Option[Any])]) extends TeamService
 {
   def listTeams = List(new no.bekk.scala.Team("Team name"))
-  def statusOfQuestionForTeam(team:Team):List[(Question, Option[String])] = questions
+  def statusOfQuestionForTeam(team:Team):List[(Question, Option[Any])] = questions
 
 }

@@ -27,5 +27,5 @@ class TestOppgaverSnippet  extends FlatSpec with ShouldMatchers with BeforeAndAf
 
 trait TestChallenges
 { self: Oppgaver =>
-  override val challengesList = List(new Challenge("Header", "svar"))
+  override val challengesList = List(new Challenge("Header", "", "svar"))
 }
