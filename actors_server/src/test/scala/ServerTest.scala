@@ -6,19 +6,21 @@ import org.scalatest.matchers.ShouldMatchers
 import se.scalablesolutions.akka.actor.Actor._
 import se.scalablesolutions.akka.actor._
 
+
+
 trait TestChallenges
-{
+{  
   val challenges = List(
-    new Challenge("challenge", "answer"),
-    new Challenge("challenge2", "answer")
+    new Challenge("challenge", "", "answer"),
+    new Challenge("challenge2", "", "answer")
   )
 }
 
-class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
+class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
 
   var server:ActorRef = null
   val team = new Team("test")
-  
+
   override def beforeEach={
     server = actorOf(new Server with TestChallenges with PrintlineScoreBoardProvider).start
   }
@@ -27,21 +29,21 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     server = actorOf(new Server with Challenges with PrintlineScoreBoardProvider).start
     val chalange = server !! MoreChallenges(team)
 
-    chalange should be (Some(Question("tester")))
+    chalange should be (Some(Question("tester", "")))
   }
 
   it should "give diffrent challenges" in {
     val challenge = server !! MoreChallenges(team)
-    challenge should be (Some(Question("challenge")))
+    challenge should be (Some(Question("challenge", "")))
 
     val challenge2 = server !! MoreChallenges(team)
-    challenge2 should be (Some(Question("challenge2")))
+    challenge2 should be (Some(Question("challenge2", "")))
   }
 
   it should "repeate the diffrent challenges" in{
     server !! MoreChallenges(team) should not be (None)
     server !! MoreChallenges(team) should not be (None)
-    val firstQuestion = Some(new Question("challenge"))
+    val firstQuestion = Some(new Question("challenge", ""))
     server !! MoreChallenges(team) should equal(firstQuestion)
   }
 
@@ -90,7 +92,8 @@ class ServerTest extends FlatSpec with ShouldMatchers with BeforeAndAfterEach {
     server !! Answer(team, chalange.get.asInstanceOf[Question], "answer")
 
     scoreBoardTeam should equal(team)
-    scoreBoardChalange should equal(new Challenge(chalange.get.asInstanceOf[Question].question, "answer"))
+    val challenge = chalange.get.asInstanceOf[Question]
+    scoreBoardChalange should equal(new Challenge(challenge.question, challenge.content, "answer"))
   }
 
 

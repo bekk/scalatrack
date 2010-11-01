@@ -42,8 +42,8 @@ abstract class Server extends Actor{
     }
   }
 
-  private def handleAnswer(team: Team, chalange:Question, answer:String):Verdict={
-    val answeredChallenge = new Challenge(chalange.question, answer)
+  private def handleAnswer(team: Team, chalange:Question, answer:Any):Verdict={
+    val answeredChallenge = new Challenge(chalange.question, chalange.content, answer)
     if(challenges.exists(_.equals(answeredChallenge))){
       scoreBoard.chalangeCompleted(team, answeredChallenge)
       Correct()
@@ -52,7 +52,10 @@ abstract class Server extends Actor{
   }
 
   def receive={
-    case MoreChallenges(team) => self.reply(Question(nextChallenge(team).question))
+    case MoreChallenges(team) => {
+      val challenge: Challenge = nextChallenge(team)
+      self.reply(Question(challenge.question, challenge.content))
+    }
     case Answer(team, challenge, answer) => self.reply(handleAnswer(team, challenge, answer))
   }
 }

@@ -29,7 +29,7 @@ abstract class Client
 
     while(true){
        remote !! MoreChallenges(team) match {
-         case Some(x@Question(_)) => {
+         case Some(x@Question(_, _)) => {
            println("question " + x)
            val correct_? = remote !! Answer(team, x, "svar")
            println(correct_?)
