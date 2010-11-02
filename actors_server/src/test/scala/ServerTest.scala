@@ -26,7 +26,7 @@ class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
   }
 
   "As a client the server" should "give a challenge when you ask for one" in {
-    server = actorOf(new Server with Challenges with PrintlineScoreBoardProvider).start
+    server = actorOf(new Server with SimpleChallenges with PrintlineScoreBoardProvider).start
     val chalange = server !! MoreChallenges(team)
 
     chalange should be (Some(Question("tester", "")))
@@ -96,6 +96,13 @@ class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
     scoreBoardChalange should equal(new Challenge(challenge.question, challenge.content, "answer"))
   }
 
-
+  trait SimpleChallenges
+  {
+    val challenges = List(
+      new Challenge("tester",   "", "svar"),
+      new Challenge("tester2",  "", "svar"),
+      new Challenge("tester3",  "", "svar")
+    )
+  }
 
 }
