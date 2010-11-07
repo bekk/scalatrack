@@ -15,14 +15,17 @@ class ChallengeCollectionTests extends FlatSpec with ShouldMatchers with BeforeA
   }
 
   "The collection of tests " should "all have correct answers" in{
-                        val team = new Team("test")
+    val team = new Team("test")
     val server = actorOf(new Server with Challenges with PrintlineScoreBoardProvider).start
 
+    var preDefinedAnswers = "pong" :: 4 :: Nil
 
-    val answers = AllChallenges.list.map(c => new Answer(team, new Question(c.question, c.content) ,c.answer))
+    val answers = AllChallenges.list.map(c => {
+      val answer = new Answer(team, new Question(c.question, c.content) , preDefinedAnswers.head)
+      preDefinedAnswers = preDefinedAnswers.tail
+      answer
+    })
 
     answers.foreach(a => (server !! a) should be (Some(Correct())))
-
-
   }
 }

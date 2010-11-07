@@ -11,8 +11,8 @@ import se.scalablesolutions.akka.actor._
 trait TestChallenges
 {  
   val challenges = List(
-    new Challenge("challenge", "", "answer"),
-    new Challenge("challenge2", "", "answer")
+    new Challenge("challenge", "", (tekst) => tekst.equals("answer")),
+    new Challenge("challenge2", "", (tekst) => tekst.equals("answer"))
   )
 }
 
@@ -75,12 +75,12 @@ class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
 
   it should "update the score board" in{
     var scoreBoardTeam:Team = null;
-    var scoreBoardChalange: Challenge = null
+    var scoreBoardQuestion: Question = null
     class TestScoreBoard extends ScoreBoardService
     {
-      def chalangeCompleted(teamet: no.bekk.scala.Team, chalange:no.bekk.scala.Challenge) = {
+      def chalangeCompleted(teamet: no.bekk.scala.Team, question:Question) = {
         scoreBoardTeam = teamet;
-        scoreBoardChalange = chalange;
+        scoreBoardQuestion = question;
       }
     }
     trait TestScoreBoardService{
@@ -93,15 +93,15 @@ class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
 
     scoreBoardTeam should equal(team)
     val challenge = chalange.get.asInstanceOf[Question]
-    scoreBoardChalange should equal(new Challenge(challenge.question, challenge.content, "answer"))
+    scoreBoardQuestion should equal(new Question(challenge.question, challenge.content))
   }
 
   trait SimpleChallenges
   {
     val challenges = List(
-      new Challenge("tester",   "", "svar"),
-      new Challenge("tester2",  "", "svar"),
-      new Challenge("tester3",  "", "svar")
+      new Challenge("tester",   "", (tekst) => tekst.equals("svar")),
+      new Challenge("tester2",  "", (tekst) => tekst.equals("svar")),
+      new Challenge("tester3",  "", (tekst) => tekst.equals("svar"))
     )
   }
 

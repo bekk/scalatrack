@@ -12,8 +12,8 @@ trait CometServerScoreboardProvider
 
 class CometServerScoreboardService extends ScoreBoardService
 {
-  def chalangeCompleted(team: Team, challenge: Challenge) = {
-    TeamRegisterWithChallenges.registerCompletedChalange(team, new Question(challenge.question, challenge.content), Some(challenge.answer))    
+  def chalangeCompleted(team: Team, quiestion: Question) = {
+    TeamRegisterWithChallenges.registerCompletedChalange(team, new Question(quiestion.question, quiestion.content), Some(quiestion))
     LeretServer ! new ChangesToTheScoreboard()
   }
 }

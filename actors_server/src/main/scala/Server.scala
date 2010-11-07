@@ -42,13 +42,19 @@ abstract class Server extends Actor{
     }
   }
 
-  private def handleAnswer(team: Team, chalange:Question, answer:Any):Verdict={
-    val answeredChallenge = new Challenge(chalange.question, chalange.content, answer)
-    if(challenges.exists(_.equals(answeredChallenge))){
-      scoreBoard.chalangeCompleted(team, answeredChallenge)
-      Correct()
-    } else
-      Wrong()
+  private def handleAnswer(team: Team, challenge:Question, answer:Any):Verdict={
+    challenges.find(_.question.equals(challenge.question)) match {
+      case Some(challenge) => {
+        if(challenge.answer(answer)){
+          scoreBoard.chalangeCompleted(team, new Question(challenge.question, challenge.content))
+          Correct()
+        }else
+        {
+          Wrong()
+        }
+      }
+      case None => Wrong()
+    }
   }
 
   def receive={

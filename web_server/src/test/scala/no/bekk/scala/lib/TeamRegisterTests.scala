@@ -64,8 +64,8 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
   trait TwoTestChallenges extends Challenges
   {
     override val challenges = List(
-      new Challenge("a", "", "a"),
-      new Challenge("b", "", "b")
+      new Challenge("a", "", _.equals("a")),
+      new Challenge("b", "", _.equals("b"))
     )
   }
 

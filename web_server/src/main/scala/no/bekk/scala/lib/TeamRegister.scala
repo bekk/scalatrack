@@ -22,11 +22,12 @@ trait TeamRegister extends TeamService
   }
 
   def registerCompletedChalange(team: Team, question:Question, answer: Option[Any])={
+    println("team klarte " + team + " , " + question)
     val teamList = teamsAnswers.get(team) match {
       case None =>
         teamsAnswers = teamsAnswers + ((team, firstAnswer(question, answer)))
       case Some(list) =>
-        teamsAnswers = teamsAnswers+ ((team, newAnswer(list, question, answer)))
+        teamsAnswers = teamsAnswers + ((team, newAnswer(list, question, answer)))
     }
   }
 

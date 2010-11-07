@@ -25,19 +25,14 @@ abstract class Client
   def run {
     val remote = publisher
 
-    println("remote er " + remote)
-
-    while(true){
-       remote !! MoreChallenges(team) match {
-         case Some(x@Question(_, _)) => {
-           println("question " + x)
-           val correct_? = remote !! Answer(team, x, "svar")
-           println(correct_?)
-         }
-         case x@None => println("hva ... " + x)
-       }
+    remote !! MoreChallenges(team) match {
+      case Some(x@Question(_, list:List[Int])) => remote !! Answer(team, x, list.last)
+      case Some(x@Question(_, _)) => {
+         val correct_? = remote !! Answer(team, x, "pong")
+       println(correct_?)
+     }
+       case x@None => println("hva ... " + x)
     }
-
   }
 }
 

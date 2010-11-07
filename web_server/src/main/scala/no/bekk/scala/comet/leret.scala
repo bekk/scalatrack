@@ -41,7 +41,7 @@ object LeretServer extends LiftActor with ListenerManager {
    def createUpdate = List()
 
    override def lowPriority = {
-    case completedChallenge@ChangesToTheScoreboard()=> {
+    case _=> {
       updateListeners()
     }
    }
