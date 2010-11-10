@@ -59,6 +59,20 @@ class TeamRegisterTests extends FlatSpec with ShouldMatchers with BeforeAndAfter
 
   }
 
+  it should "remove correct answer if answered wrong" in{
+    val newTeam = new Team("aslak")
+    TestTeamRegister.registerCompletedChalange(newTeam, Question("a", ""), Some("a"))
+    TestTeamRegister.statusOfQuestionForTeam(newTeam) should be(
+        (new Question("a", ""), Some("a")) :: (new Question("b", ""), None) :: Nil
+      )
+
+    TestTeamRegister.registerFaildChallenge(newTeam, Question("a", ""))
+    TestTeamRegister.statusOfQuestionForTeam(newTeam) should be(
+        (new Question("a", ""), None) :: (new Question("b", ""), None) :: Nil
+      )
+
+  }
+
   object TestTeamRegister extends TeamRegister with TwoTestChallenges
 
   trait TwoTestChallenges extends Challenges

@@ -12,7 +12,7 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaPr
 
   val liftVersion = "2.1"
 
-  val malinf = "no.bekk" %% "maling" % "0.1"
+  val malinf = "no.bekk" %% "maling" % "0.1.1"
 
   val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
 

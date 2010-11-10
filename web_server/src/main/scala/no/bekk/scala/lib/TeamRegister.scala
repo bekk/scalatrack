@@ -31,6 +31,17 @@ trait TeamRegister extends TeamService
     }
   }
 
+  def registerFaildChallenge(team : Team, question: Question)= {
+    val teamList = teamsAnswers.get(team).get
+    teamsAnswers = teamsAnswers + ((team, teamList.map( answer =>{
+        if(answer._1.equals(question))
+              (question, None)
+        else
+          answer
+      })
+    ))
+  }
+
   private def firstAnswer(question: Question, answer:Option[Any]):List[(Question,Option[Any])] = {
     challenges.map( challenge => {
       val q = new Question(challenge.question, challenge.content)
