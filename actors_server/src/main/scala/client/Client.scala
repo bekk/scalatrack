@@ -37,6 +37,7 @@ trait GiveAnswer {
         case x@Question(OppgaveTolker("P-05:"), list:List[Int]) =>  list.reverse
         case x@Question(OppgaveTolker("P-07:"), list:List[ List[Int] ]) =>   list.flatMap(r => r)
         case x@Question(OppgaveTolker("P-08:"), list:List[Symbol]) => fjernLikeRepiterendeElementer(list)
+        case x@Question(OppgaveTolker("P-09:"), list:List[Symbol]) => leggLikeIListe(list)
       }
   }
 
@@ -52,6 +53,22 @@ trait GiveAnswer {
       }
 
     })
+  }
+
+  def leggLikeIListe(list: List[Symbol]):List[List[Symbol]]={
+    val newList = list.foldRight(List[List[Symbol]]())((next, collected ) =>{
+      if(collected.isEmpty)
+        List(next) :: collected
+      else{
+        if(collected.head.head.equals(next))
+            (next :: collected.head) :: collected.tail
+        else
+          List(next) :: collected
+      }
+
+    })
+    println(newList)
+    newList
   }
 
 }
