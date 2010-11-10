@@ -46,10 +46,11 @@ abstract class Server extends Actor{
     challenges.find(_.question.equals(challenge.question)) match {
       case Some(challenge) => {
         if(challenge.answer(answer)){
-          scoreBoard.chalangeCompleted(team, new Question(challenge.question, challenge.content))
+          scoreBoard.challengeCompleted(team, new Question(challenge.question, challenge.content))
           Correct()
         }else
         {
+          scoreBoard.challengeFailed(team, new Question(challenge.question, challenge.content))
           Wrong()
         }
       }
