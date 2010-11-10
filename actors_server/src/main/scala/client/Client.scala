@@ -7,37 +7,57 @@ import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 
-trait PublisherProvider
-{
-  val publisher = RemoteClient.actorFor("Server", "localhost", 9999)
-}
-
-trait TestTeamProvider
+class Client extends GiveAnswer
 {
   val team = new Team("test")
-}
-
-abstract class Client
-{
-  val team:Team
-  val publisher: ActorRef
+  val remote = RemoteClient.actorFor("Server", "localhost", 9999)
   
   def run {
-    val remote = publisher
 
-    remote !! MoreChallenges(team) match {
-      case Some(x@Question(_, list:List[Int])) => remote !! Answer(team, x, list.last)
-      case Some(x@Question(_, _)) => {
-         val correct_? = remote !! Answer(team, x, "pong")
-       println(correct_?)
-     }
-       case x@None => println("hva ... " + x)
+    while(true)
+    {
+      val question = (remote !! MoreChallenges(team)).get.asInstanceOf[Question]
+      remote !! new Answer(team, question, giveAnswer(question) )
     }
   }
+
+}
+
+trait GiveAnswer {
+  def giveAnswer(question : Question):Any = {
+    val OppgaveTolker = "^([^ ]+).*".r
+
+    question match {
+        case x@Question("Ping", "") =>  "pong"
+        case x@Question(OppgaveTolker("Talet"), _) =>  4
+        case x@Question(OppgaveTolker("P-01:"), list:List[Int]) =>  list.last
+        case x@Question(OppgaveTolker("P-02:"), list:List[Int]) =>  list.dropRight(1).last
+        case x@Question(OppgaveTolker("P-03:"), list:List[Int]) =>  list(3)
+        case x@Question(OppgaveTolker("P-04:"), list:List[Int]) =>  list.length
+        case x@Question(OppgaveTolker("P-05:"), list:List[Int]) =>  list.reverse
+        case x@Question(OppgaveTolker("P-07:"), list:List[ List[Int] ]) =>   list.flatMap(r => r)
+        case x@Question(OppgaveTolker("P-08:"), list:List[Symbol]) => fjernLikeRepiterendeElementer(list)
+      }
+  }
+
+  def fjernLikeRepiterendeElementer(list:List[Symbol])={
+    list.foldRight(List[Symbol]())((next ,collected)=> {
+      if(collected.isEmpty)
+         next :: collected
+      else{
+        if(collected.head.equals(next))
+          collected
+        else
+          next :: collected
+      }
+
+    })
+  }
+
 }
 
 object Client extends Application
 {
-  val client = new Client with PublisherProvider with TestTeamProvider
+  val client = new Client
   client.run
 }

@@ -10,7 +10,7 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaPr
   val scalatoolsRelease = "Scala Tools Snapshot" at
   "http://scala-tools.org/repo-releases/"
 
-  val liftVersion = "2.1-SNAPSHOT"
+  val liftVersion = "2.1"
 
   val malinf = "no.bekk" %% "maling" % "0.1"
 
