@@ -1,0 +1,8 @@
+BEKKfoiler i latex
+
+krever;
+ * texlive
+ * texlive-fonts-extra
+
+"kompileres" med pdflatex
+

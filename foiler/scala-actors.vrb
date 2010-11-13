@@ -1,0 +1,15 @@
+\frametitle {Actors - eksempler eksempler}\begin {content}
+    \begin{verbatim}
+      case class Tick
+
+      class Counter extends Actor {
+      private var counter = 0
+
+      def receive = {
+      case Tick =>
+      counter += 1
+      println(counter)
+      }
+      }
+    \end{verbatim}
+  \end{content}
