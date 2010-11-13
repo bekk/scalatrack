@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  13 NOV 2010 12:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  13 NOV 2010 13:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -826,7 +826,35 @@ Grid set 16 x 16 = 22.7622pt x 17.07166pt
 \TP@tbargs=\toks42
 \TP@prevdepth=\dimen204
 TextBlockOrigin set to 0pt x 0pt
-) (./beamerthemebekk.sty (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+) (/usr/share/texmf-texlive/tex/latex/listings/listings.sty
+\lst@mode=\count165
+\lst@gtempboxa=\box59
+\lst@token=\toks43
+\lst@length=\count166
+\lst@currlwidth=\dimen205
+\lst@column=\count167
+\lst@pos=\count168
+\lst@lostspace=\dimen206
+\lst@width=\dimen207
+\lst@newlines=\count169
+\lst@lineno=\count170
+\lst@maxwidth=\dimen208
+
+(/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count171
+\lst@skipnumbers=\count172
+\lst@framebox=\box60
+)
+(/usr/share/texmf-texlive/tex/latex/listings/listings.cfg
+File: listings.cfg 2007/02/22 1.4 listings configuration
+))
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
+
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(./beamerthemebekk.sty (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
 (/usr/share/texmf-texlive/tex/latex/base/t1enc.def
@@ -939,7 +967,7 @@ TextBlockOrigin set to 1.5em x 2.5em
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 16.
+(hyperref)                removing `\\' on input line 41.
 
 (./scala-actors.aux)
 \openout1 = `scala-actors.aux'.
@@ -964,20 +992,20 @@ File: lgrcmr.fd 2008/01/04 v1.0 Greek Computer Modern
 )
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 23.
+(Font)              using `T1/cmr/m/n' instead on input line 48.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count165
-\scratchdimen=\dimen205
-\scratchbox=\box59
-\nofMPsegments=\count166
-\nofMParguments=\count167
-\everyMPshowfont=\toks43
-\MPscratchCnt=\count168
-\MPscratchDim=\dimen206
-\MPnumerator=\count169
-\everyMPtoPDFconversion=\toks44
+\scratchcounter=\count173
+\scratchdimen=\dimen209
+\scratchbox=\box61
+\nofMPsegments=\count174
+\nofMParguments=\count175
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count176
+\MPscratchDim=\dimen210
+\MPnumerator=\count177
+\everyMPtoPDFconversion=\toks45
 )
 *geometry auto-detecting driver*
 *geometry detected driver: pdftex*
@@ -1020,37 +1048,39 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-Package hyperref Info: Link coloring OFF on input line 23.
+Package hyperref Info: Link coloring OFF on input line 48.
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count170
+\c@section@level=\count178
 )
-LaTeX Info: Redefining \ref on input line 23.
-LaTeX Info: Redefining \pageref on input line 23.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
  (./scala-actors.out) (./scala-actors.out)
 \@outlinefile=\write4
 \openout4 = `scala-actors.out'.
 
-\AtBeginShipoutBox=\box60
+\AtBeginShipoutBox=\box62
 \symnumbers=\mathgroup10
 \sympureletters=\mathgroup11
 
 (/usr/share/texmf-texlive/tex/latex/translator/translator-theorem-dictionary-En
 glish.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) ABD: EveryShipout initializing macros (./scala-actors.nav)
+) ABD: EveryShipout initializing macros
+\c@lstlisting=\count179
+ (./scala-actors.nav)
 
 LaTeX Font Warning: Font shape `T1/rmfamily/bx/n' undefined
-(Font)              using `T1/rmfamily/m/n' instead on input line 23.
+(Font)              using `T1/rmfamily/m/n' instead on input line 48.
 
 <./img/forside.jpg, id=12, 1204.5pt x 319.1925pt>
 File: ./img/forside.jpg Graphic file (type jpg)
  <use ./img/forside.jpg>
-Overfull \hbox (4.95378pt too wide) in paragraph at lines 25--25
+Overfull \hbox (4.95378pt too wide) in paragraph at lines 50--50
  [][] 
  []
 
@@ -1059,17 +1089,17 @@ Overfull \hbox (4.95378pt too wide) in paragraph at lines 25--25
 File: ./img/forside-bunn.jpg Graphic file (type jpg)
 
 <use ./img/forside-bunn.jpg>
-Overfull \hbox (0.63008pt too wide) in paragraph at lines 25--25
+Overfull \hbox (0.63008pt too wide) in paragraph at lines 50--50
 [][]  
  []
 
 
 LaTeX Font Warning: Font shape `T1/rmfamily/bx/n' in size <4> not available
-(Font)              size <5> substituted on input line 25.
+(Font)              size <5> substituted on input line 50.
 
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 25.
+(Font)              size <5> substituted on input line 50.
 
 [1
 Non-PDF special ignored!
@@ -1082,7 +1112,7 @@ forside-bunn.jpg>]
 <./img/quizlag.png, id=25, 363.43872pt x 208.87283pt>
 File: ./img/quizlag.png Graphic file (type png)
  <use ./img/quizlag.png>
-Overfull \hbox (21.09132pt too wide) in paragraph at lines 33--33
+Overfull \hbox (21.09132pt too wide) in paragraph at lines 58--58
 [][]  
  []
 
@@ -1097,7 +1127,7 @@ File: ./img/quiz-sporsmalsvar.png Graphic file (type png)
  <./img/quiz-sporsmalsvar.png>]
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/it' undefined
-(Font)              using `T1/rmfamily/m/n' instead on input line 52.
+(Font)              using `T1/rmfamily/m/n' instead on input line 77.
 
 [4
 
@@ -1131,7 +1161,7 @@ File: upxsyc.fd 2000/12/14 v1.0
 File: ./img/quiz-sporsmalsvar.png Graphic file (type png)
 
 <use ./img/quiz-sporsmalsvar.png>
-Overfull \hbox (28.21866pt too wide) in paragraph at lines 97--97
+Overfull \hbox (28.21866pt too wide) in paragraph at lines 122--122
 [][]  
  []
 
@@ -1140,24 +1170,35 @@ Overfull \hbox (28.21866pt too wide) in paragraph at lines 97--97
 ]
 File: ./img/quiz-sporsmalsvar.png Graphic file (type png)
  <use ./img/quiz-sporsmalsvar.png>
-Overfull \hbox (28.21866pt too wide) in paragraph at lines 115--115
+Overfull \hbox (28.21866pt too wide) in paragraph at lines 134--136
 [][]  
  []
 
 [8
 
-] <./img/bekk.jpg, id=74, 1194.4625pt x 485.815pt>
+]
+File: ./img/quiz-sporsmalsvar.png Graphic file (type png)
+ <use ./img/quiz-sporsmalsvar.png>
+Overfull \hbox (47.63329pt too wide) in paragraph at lines 149--151
+[][]  
+ []
+
+[9
+
+] [10
+
+] <./img/bekk.jpg, id=83, 1194.4625pt x 485.815pt>
 File: ./img/bekk.jpg Graphic file (type jpg)
  <use ./img/bekk.jpg>
-<./img/bekk-logo.jpg, id=75, 234.8775pt x 61.22874pt>
+<./img/bekk-logo.jpg, id=84, 234.8775pt x 61.22874pt>
 File: ./img/bekk-logo.jpg Graphic file (type jpg)
 
 <use ./img/bekk-logo.jpg>
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/n' in size <1> not available
-(Font)              size <5> substituted on input line 138.
+(Font)              size <5> substituted on input line 187.
 
-[9
+[11
 
  <./img/bekk.jpg> <./img/bekk-logo.jpg>]
 \tf@nav=\write5
@@ -1179,25 +1220,22 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 16365 strings out of 494238
- 273070 string characters out of 1167101
- 368359 words of memory out of 3000000
- 19076 multiletter control sequences out of 15000+50000
- 23240 words of font info for 60 fonts, out of 3000000 for 9000
+ 17683 strings out of 494238
+ 292231 string characters out of 1167101
+ 417114 words of memory out of 3000000
+ 20375 multiletter control sequences out of 15000+50000
+ 24012 words of font info for 61 fonts, out of 3000000 for 9000
  608 hyphenation exceptions out of 8191
- 45i,14n,51p,598b,510s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{Navigation10} has been referenced but does not ex
-ist, replaced by a fixed one
-
- </home/aslak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0500.600pk> </home/asl
-ak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/aslak/.texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/aslak/.texmf-var/fonts/pk
-/ljfour/jknappen/ec/ecrm1095.600pk>{/usr/share/texmf-texlive/fonts/enc/dvips/gf
-sdidot/didotec.enc}</usr/share/texmf-texlive/fonts/type1/public/gfsdidot/GFSDid
-ot-Bold.pfb></usr/share/texmf-texlive/fonts/type1/public/txfonts/t1xtt.pfb>
-Output written on scala-actors.pdf (9 pages, 380997 bytes).
+ 45i,14n,51p,598b,1364s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/aslak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0500.600pk> </home/a
+slak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/aslak/.texmf
+-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/aslak/.texmf-var/fonts/
+pk/ljfour/jknappen/ec/ecrm1095.600pk>{/usr/share/texmf-texlive/fonts/enc/dvips/
+gfsdidot/didotec.enc}</usr/share/texmf-texlive/fonts/type1/public/gfsdidot/GFSD
+idot-Bold.pfb></usr/share/texmf-texlive/fonts/type1/public/txfonts/t1xtt.pfb>
+Output written on scala-actors.pdf (11 pages, 385623 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
- 19 named destinations out of 1000 (max. 500000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 21 named destinations out of 1000 (max. 500000)
  67 words of extra memory for PDF output out of 10000 (max. 10000000)
 

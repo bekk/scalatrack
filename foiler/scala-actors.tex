@@ -9,6 +9,31 @@
 \usepackage{multimedia}
 \usepackage{beamerthemesplit}
 \usepackage[absolute, overlay]{textpos}
+\usepackage{listings}
+
+\usepackage{color}
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\tiny\ttfamily},
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+ 
+
 
 \usetheme{bekk}
 
@@ -62,19 +87,19 @@
 
 \begin{frame}[fragile]{Actors - eksempler eksempler}
   \begin{content}
-    \begin{verbatim}
+    \begin{lstlisting}
       case class Tick
       
       class Counter extends Actor {
-	      private var counter = 0
-	
-	      def receive = {
-		      case Tick =>
-			      counter += 1
-			      println(counter)
-	      }
+        private var counter = 0
+
+        def receive = {
+          case Tick =>
+            counter += 1
+            println(counter)
+        }
       }
-    \end{verbatim}
+    \end{lstlisting}
   \end{content}
 \end{frame}
 
@@ -96,11 +121,13 @@
   \end{content}
 \end{frame}
 
-\begin{frame}{Actors - in action}
+\begin{frame}[containsverbatim]{Actors - in action}
   \begin{content}
     \centering
-    case class MoreQuestions(val team:Team)\\
-    case class Question(val question:String, val content:Any)\\
+    \begin{lstlisting}
+      case class MoreQuestions(val team:Team)
+      case class Question(val question:String, val content:Any)
+    \end{lstlisting}
     \begin{columns}
       \column{.1\textwidth}
         Server
@@ -109,12 +136,34 @@
       \column{.1\textwidth}
         Lag
     \end{columns}
-    case class Answer(val team:Team, val question:Question, val answer:Any)\\
-    case class Correct extends Verdict
+    \begin{lstlisting}
+      case class Answer(val team:Team, val question:Question, val answer:Any)
+      case class Correct extends Verdict
+    \end{lstlisting}
   \end{content}
 \end{frame}
 
+\begin{frame}[containsverbatim]{Actors - in action}
+  \begin{content}
+    \begin{columns}
+      \column{.2\textwidth}
+        \includegraphics[scale=0.3]{quiz-sporsmalsvar}
+      \column{.8\textwidth}
+        \begin{lstlisting}
+          val question = (remote !! MoreQuestions(team)).get.asInstanceOf[Question]
+          remote !! new Answer( team, question, giveAnswer(question) )
 
+          def giveAnswer(quiestion: Question)={
+            question match {
+              case x@Question("Ping", "") =>  "pong"
+            }
+          }
+        \end{lstlisting}
+    \end{columns}
+  \end{content}
+\end{frame}
+
+\kontrast{Oppgave}
 
 \begin{frame}[plain]
   \begin{centering}
@@ -133,7 +182,7 @@
     \fontsize{1}{1}
     \selectfont
     BEKK CONSULTING AS\\
-S   KUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
+    SKUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
   \end{centering}
 \end{frame}
 
