@@ -32,7 +32,7 @@ trait GiveAnswer {
         case x@Question(OppgaveTolker("Talet"), _) =>  4
         case x@Question(OppgaveTolker("P-01:"), list:List[Int]) =>  list.last
         case x@Question(OppgaveTolker("P-02:"), list:List[Int]) =>  list.dropRight(1).last
-        case x@Question(OppgaveTolker("P-03:"), list:List[Int]) =>  list(2)
+        case x@Question(OppgaveTolker("P-03:"), list:List[Int]) =>  list(3)
         case x@Question(OppgaveTolker("P-04:"), list:List[Int]) =>  list.length
         case x@Question(OppgaveTolker("P-05:"), list:List[Int]) =>  list.reverse
         case x@Question(OppgaveTolker("P-07:"), list:List[ List[Int] ]) =>   list.flatMap(r => r)

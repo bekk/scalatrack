@@ -1,8 +1,11 @@
 package no.bekk.scala
+import scala.util.Random
 
 trait Challenges
 {
-  val listOfNumbers = List(1, 1, 2, 3, 5, 8)
+  val listOfNumbers = Range(1,8).map(Random.nextInt).toList
+  val symbols:List[Symbol] = List('a,'b,'c,'d,'e)
+  val listOfSymbols:List[Symbol] = Range(1,15).toList.map((i:Int)=> symbols(Random.nextInt(symbols.length)))
   val challenges = List(
     new Challenge("Ping", "Svar med pong",   "", (tekst:Any) => tekst.equals("pong")),
     new Challenge("Talet etter 1 - 2- 3 - x", "Svar med tallet etter 3",  3, (number:Any)=> number == 4),
@@ -12,9 +15,39 @@ trait Challenges
     new Challenge("P-04: Tell antall elemnter i listen", "" , listOfNumbers, _ == listOfNumbers.length),
     new Challenge("P-05: Reverser listen", "",  listOfNumbers, _.equals(listOfNumbers.reverse)),
     new Challenge("P-07: Flat ut listene til en liste", "",  List(List(1, 1), List(2), List(3)), _.equals(List(1, 1, 2, 3))),
-    new Challenge("P-08: Fjern like elementer, hvis de kommer etterhveranre", "" , List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e), _.equals(List('a, 'b, 'c, 'a, 'd, 'e))),
-    new Challenge("P-09: Legg like elementer som kommer etter hverandre i hver sin liste", "",  List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e), _.equals(List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e))))
+    new Challenge("P-08: Fjern like elementer, hvis de kommer etterhveranre", "" , listOfSymbols, _.equals(fjernLikeRepiterendeElementer(listOfSymbols))),
+    new Challenge("P-09: Legg like elementer som kommer etter hverandre i hver sin liste", "",  listOfSymbols, _.equals(leggLikeIListe(listOfSymbols)))
   )
+
+  def fjernLikeRepiterendeElementer(list:List[Symbol])={
+    list.foldRight(List[Symbol]())((next ,collected)=> {
+      if(collected.isEmpty)
+         next :: collected
+      else{
+        if(collected.head.equals(next))
+          collected
+        else
+          next :: collected
+      }
+
+    })
+  }
+
+  def leggLikeIListe(list: List[Symbol]):List[List[Symbol]]={
+    val newList = list.foldRight(List[List[Symbol]]())((next, collected ) =>{
+      if(collected.isEmpty)
+        List(next) :: collected
+      else{
+        if(collected.head.head.equals(next))
+            (next :: collected.head) :: collected.tail
+        else
+          List(next) :: collected
+      }
+
+    })
+    println(newList)
+    newList
+  }
 }
 
 case class Challenge(val question:String, val description:String, val content:Any, val answer:(Any)=> Boolean)

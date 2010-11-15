@@ -35,6 +35,7 @@ class ChallengeCollectionTests extends FlatSpec with ShouldMatchers with BeforeA
         val question = option.get.asInstanceOf[Question]
         val answer = new Answer(team, question, giveAnswer(question))
 
+        println(question)
         val verdict = (server !! answer)
         verdict should be (Some(Correct()))
       })
