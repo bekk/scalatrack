@@ -1,8 +1,7 @@
-actors_server/project/boot/
-actors_server/project/build/target/
-actors_server/logs/
+boot/
+target/
+logs/
 actors_server/lib
-actors_server/lib_managed/
 
 target/
 actors_server/project/plugins/project/
