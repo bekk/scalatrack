@@ -12,7 +12,10 @@ class Oppgaver
 
   def list(seq: NodeSeq):NodeSeq={
     challengesList.flatMap( challenge =>
-       bind("op", seq, "rowHeader" -> challenge.question )
+       bind("op", seq,
+         "rowHeader" -> challenge.question ,
+         "rowDescriptoin" -> challenge.description ,
+         "rowExample" -> challenge.content )
     )
   }
 }

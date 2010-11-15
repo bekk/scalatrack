@@ -1,6 +1,7 @@
 package no.bekk.scala
 
 import _root_.no.bekk.scala.messages.Question
+import _root_.no.bekk.scala.Team
 
 trait ScoreBoardService
 {

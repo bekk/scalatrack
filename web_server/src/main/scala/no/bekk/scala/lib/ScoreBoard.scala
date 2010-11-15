@@ -1,8 +1,9 @@
 package no.bekk.scala.lib
 
 import _root_.no.bekk.scala.comet.LeretServer
-import no.bekk.scala._
 import no.bekk.scala.messages._
+import no.bekk.scala.ScoreBoardService
+import no.bekk.scala.Team
 
 
 trait CometServerScoreboardProvider

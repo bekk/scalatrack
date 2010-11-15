@@ -1,6 +1,6 @@
 package no.bekk.scala.messages
 
-case class Team(val name:String)
+import _root_.no.bekk.scala.Team
 
 trait Message
 
