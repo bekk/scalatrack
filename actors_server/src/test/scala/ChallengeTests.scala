@@ -45,7 +45,7 @@ class AdvancedChallengeTests extends FlatSpec with ShouldMatchers with BeforeAnd
   trait AdvancedChallenges
   {
     val challenges = List(
-      new Challenge("last", List(1,2,3), (number) => number == 3)
+      new Challenge("last","", List(1,2,3), (number) => number == 3)
     )
   }
 }

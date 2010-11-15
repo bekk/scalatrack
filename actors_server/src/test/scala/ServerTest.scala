@@ -11,8 +11,8 @@ import se.scalablesolutions.akka.actor._
 trait TestChallenges
 {  
   val challenges = List(
-    new Challenge("challenge", "", (tekst) => tekst.equals("answer")),
-    new Challenge("challenge2", "", (tekst) => tekst.equals("answer"))
+    new Challenge("challenge", "", "", (tekst) => tekst.equals("answer")),
+    new Challenge("challenge2","", "", (tekst) => tekst.equals("answer"))
   )
 }
 
@@ -132,9 +132,9 @@ class ServerTest extends FlatSpec with ShouldMatchers  with BeforeAndAfterEach {
   trait SimpleChallenges
   {
     val challenges = List(
-      new Challenge("tester",   "", (tekst) => tekst.equals("svar")),
-      new Challenge("tester2",  "", (tekst) => tekst.equals("svar")),
-      new Challenge("tester3",  "", (tekst) => tekst.equals("svar"))
+      new Challenge("tester","",   "", (tekst) => tekst.equals("svar")),
+      new Challenge("tester2","",  "", (tekst) => tekst.equals("svar")),
+      new Challenge("tester3","",  "", (tekst) => tekst.equals("svar"))
     )
   }
 

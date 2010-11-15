@@ -20,6 +20,23 @@
     vertical-align: top;
 }
 
+.oppgaver > .oppgave
+{
+    border: 1px solid #bebebe;
+    background: none;
+
+}
+
+label, .description, .example
+{
+    display: inline-block;
+}
+
+.team.bar .oppgave,.team.bar .oppgave.failed,
+{
+    background-color:red;
+}
+
 .oppgave.solved
 {
     background-color: green;
@@ -32,8 +49,8 @@
 
 .oppgave
 {
-    height: 50px;
+    height: 70px;
     background: red;
     padding: 5px;
-    border: 2px solid white;
+    border: 1px solid white;
 }
