@@ -6,20 +6,20 @@ import se.scalablesolutions.akka.actor._
 import se.scalablesolutions.akka.remote._
 
 abstract class Server extends Actor{
-  val challenges: List[Challenge];
+  def challenges(): List[Challenge];
   val scoreBoard : ScoreBoardService;
 
   var teamChallenges = Map[Team, Int]();
 
   private def nextChallenge(team:Team) : Challenge = {
     def findFirstChallenge: Challenge = {
-      val next = challenges(0)
+      val next = challenges()(0)
       teamChallenges = teamChallenges + ((team, 1))
       next
     }
 
     def findNextChallenge(challenge: Int): Challenge = {
-      val next = challenges(challenge)
+      val next = challenges()(challenge)
       setNextChallenge(challenge)
 
       next

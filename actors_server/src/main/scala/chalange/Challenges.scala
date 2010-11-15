@@ -7,7 +7,7 @@ trait Challenges
   def listOfNumbers() = Range(1,8).map(Random.nextInt).toList
   val symbols:List[Symbol] = List('a,'b,'c,'d,'e)
   def listOfSymbols():List[Symbol] = Range(1,15).toList.map((i:Int)=> symbols(Random.nextInt(symbols.length)))
-  val challenges = List(
+  def challenges() = List(
     new Challenge("Ping", "Svar med pong",   "", (q:Question, tekst:Any) => tekst.equals("pong")),
     new Challenge("Talet etter 1 - 2- 3 - x", "Svar med tallet etter 3",  3, (q:Question, number:Any)=> number == 4),
     new Challenge("P-01: Siste element i listen", "", listOfNumbers() , (q:Question, answer:Any) => q.content.asInstanceOf[List[Int]].last.equals(answer)),

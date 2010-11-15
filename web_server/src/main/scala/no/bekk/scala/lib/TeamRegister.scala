@@ -8,7 +8,7 @@ object TeamRegisterWithChallenges extends TeamRegister with Challenges
 
 trait TeamRegister extends TeamService
 {
-  val challenges: List[Challenge];
+  def challenges: List[Challenge];
 
   private var teamsAnswers : Map[Team, List[(Question, Option[Any])] ]= Map()
 
