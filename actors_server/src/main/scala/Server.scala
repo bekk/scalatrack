@@ -42,11 +42,11 @@ abstract class Server extends Actor{
     }
   }
 
-  private def handleAnswer(team: Team, challenge:Question, answer:Any):Verdict={
-    challenges.find(_.question.equals(challenge.question)) match {
+  private def handleAnswer(team: Team, question:Question, answer:Any):Verdict={
+    challenges.find(_.question.equals(question.question)) match {
       case Some(challenge) => {
-        if(challenge.answer(answer)){
-          scoreBoard.challengeCompleted(team, new Question(challenge.question, challenge.content))
+        if(challenge.answer(question, answer)){
+          scoreBoard.challengeCompleted(team, question)
           Correct()
         }else
         {

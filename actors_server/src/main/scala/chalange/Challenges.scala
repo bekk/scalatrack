@@ -1,5 +1,6 @@
 package no.bekk.scala
 import scala.util.Random
+import no.bekk.scala.messages.Question
 
 trait Challenges
 {
@@ -7,16 +8,16 @@ trait Challenges
   val symbols:List[Symbol] = List('a,'b,'c,'d,'e)
   val listOfSymbols:List[Symbol] = Range(1,15).toList.map((i:Int)=> symbols(Random.nextInt(symbols.length)))
   val challenges = List(
-    new Challenge("Ping", "Svar med pong",   "", (tekst:Any) => tekst.equals("pong")),
-    new Challenge("Talet etter 1 - 2- 3 - x", "Svar med tallet etter 3",  3, (number:Any)=> number == 4),
-    new Challenge("P-01: Siste element i listen", "", listOfNumbers , _.equals(listOfNumbers.last)),
-    new Challenge("P-02: Nest siste element i listen", "" , listOfNumbers, _.equals(listOfNumbers.dropRight(1).last)),
-    new Challenge("P-03: Finn det 3 elementet i listen, det første elementet er det 0'te", "",  listOfNumbers, _ == listOfNumbers(3)),
-    new Challenge("P-04: Tell antall elemnter i listen", "" , listOfNumbers, _ == listOfNumbers.length),
-    new Challenge("P-05: Reverser listen", "",  listOfNumbers, _.equals(listOfNumbers.reverse)),
-    new Challenge("P-07: Flat ut listene til en liste", "",  List(List(1, 1), List(2), List(3)), _.equals(List(1, 1, 2, 3))),
-    new Challenge("P-08: Fjern like elementer, hvis de kommer etterhveranre", "" , listOfSymbols, _.equals(fjernLikeRepiterendeElementer(listOfSymbols))),
-    new Challenge("P-09: Legg like elementer som kommer etter hverandre i hver sin liste", "",  listOfSymbols, _.equals(leggLikeIListe(listOfSymbols)))
+    new Challenge("Ping", "Svar med pong",   "", (q:Question, tekst:Any) => tekst.equals("pong")),
+    new Challenge("Talet etter 1 - 2- 3 - x", "Svar med tallet etter 3",  3, (q:Question, number:Any)=> number == 4),
+    new Challenge("P-01: Siste element i listen", "", listOfNumbers , (q:Question, answer:Any) => q.content.asInstanceOf[List[Int]].last.equals(answer)),
+    new Challenge("P-02: Nest siste element i listen", "" , listOfNumbers, (q:Question, answer:Any) => q.content.asInstanceOf[List[Int]].dropRight(1).last.equals(answer)),
+    new Challenge("P-03: Finn det 3 elementet i listen, det første elementet er det 0'te", "",  listOfNumbers,(q:Question, answer:Any) => q.content.asInstanceOf[List[Int]](3).equals(answer)),
+    new Challenge("P-04: Tell antall elemnter i listen", "" , listOfNumbers,(q:Question, answer:Any)=> answer.equals(q.content.asInstanceOf[List[Int]].length)),
+    new Challenge("P-05: Reverser listen", "",  listOfNumbers, (q:Question, answer:Any) => answer.equals(q.content.asInstanceOf[List[Int]].reverse)),
+    new Challenge("P-07: Flat ut listene til en liste", "",  List(List(1, 1), List(2), List(3)), (q:Question, answer:Any) => answer.equals(List(1, 1, 2, 3))),
+    new Challenge("P-08: Fjern like elementer, hvis de kommer etterhveranre", "" , listOfSymbols, (q:Question, answer:Any) => answer.equals(fjernLikeRepiterendeElementer(listOfSymbols))),
+    new Challenge("P-09: Legg like elementer som kommer etter hverandre i hver sin liste", "",  listOfSymbols, (q:Question, answer:Any) => answer.equals(leggLikeIListe(listOfSymbols)))
   )
 
   def fjernLikeRepiterendeElementer(list:List[Symbol])={
@@ -50,4 +51,4 @@ trait Challenges
   }
 }
 
-case class Challenge(val question:String, val description:String, val content:Any, val answer:(Any)=> Boolean)
+case class Challenge(val question:String, val description:String, val content:Any, val answer:(Question, Any)=> Boolean)
