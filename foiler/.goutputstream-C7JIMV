@@ -335,34 +335,6 @@
 \begin{frame}[containsverbatim]{Pattern matching - avansert}
   \begin{content}
     Matche på spørsmål\\
-    Pakke opp objecter, extractors\\
-    \begin{lstlisting}[basicstyle={\ttfamily}]
-new Question("spørsmål", List("s", "v")) match {
-  case x@Question(sp, svar:List[String]) =>  {
-    println(sporsmal + ", " + svar)//warning!
-  }
-}
-    \end{lstlisting}
-  \end{content}
-\end{frame}
-
-\begin{frame}[containsverbatim]{Pattern matching - avansert}
-  \begin{content}
-    Matche på spørsmål\\
-    Pakke opp objecter, extractors\\
-    \begin{lstlisting}[basicstyle={\ttfamily}]
-new Question("spørsmål", List("s", "v")) match {
-  case x@Question(sp, svar@List(s:String, _*) =>{
-   println(sporsmal + ", " + svar)
-  }
-}
-    \end{lstlisting}
-  \end{content}
-\end{frame}
-
-\begin{frame}[containsverbatim]{Pattern matching - avansert}
-  \begin{content}
-    Matche på spørsmål\\
     Regexp\\
     \begin{lstlisting}[basicstyle={\large\ttfamily}]
 	    val Epost = "^(.*)@(.*)\.(.*)$".r
@@ -377,32 +349,4 @@ new Question("spørsmål", List("s", "v")) match {
     \begin{lstlisting}[basicstyle={\large\ttfamily}]
 	    val Epost = "^(.*)@(.*)\.(.*)$".r
 
-      "aslakjo@gmail.com" match {
-	      case Epost(user, domain, tld) => //spam!
-      }
-    \end{lstlisting}
-  \end{content}
-\end{frame}
-
-\begin{frame}[plain]
-  \begin{centering}
-    \includegraphics[height=11em]{bekk}
-    \\\vspace{2em}\hfill\\
-    \small
-    \includegraphics[height=1em]{bekk-logo}
-    \\\vspace{.4em}\hfill\\
-    \fontsize{8}{8}
-    \selectfont
-    \textbf{Aslak Johannessen}\\
-    Senior Consultant\\
-    982 19 249 \\
-    aslakjo@bekk.no\\
-    \vspace{.3em}\hfill\\
-    \fontsize{1}{1}
-    \selectfont
-    BEKK CONSULTING AS\\
-    SKUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
-  \end{centering}
-\end{frame}
-
-\end{document}
+      
