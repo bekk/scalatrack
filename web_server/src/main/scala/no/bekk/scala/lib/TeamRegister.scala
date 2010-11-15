@@ -32,10 +32,11 @@ trait TeamRegister extends TeamService
   }
 
   def registerFaildChallenge(team : Team, question: Question)= {
+    println("team klarte ikke spørsmål  " + team + ", "+ question)
     val teamList = teamsAnswers.get(team).get
     teamsAnswers = teamsAnswers + ((team, teamList.map( answer =>{
         if(answer._1.equals(question))
-              (question, None)
+          (question, None)
         else
           answer
       })
@@ -55,7 +56,7 @@ trait TeamRegister extends TeamService
   private def newAnswer(previouseAnswers:List[(Question,Option[Any])], question: Question, answer: Option[Any]):List[(Question,Option[Any])] =
   {
     previouseAnswers.map(previouseAnswer =>{
-      if(previouseAnswer._1.equals(question))
+      if(previouseAnswer._1.question.equals(question.question))
         ((question, answer))
       else
         previouseAnswer

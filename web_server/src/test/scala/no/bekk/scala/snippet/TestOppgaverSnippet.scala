@@ -2,6 +2,7 @@ package no.bekk.scala.snippet
 
 import org.scalatest.{FlatSpec, BeforeAndAfterEach}
 import org.scalatest.matchers.ShouldMatchers
+import no.bekk.scala.messages.Question
 import scala.xml.NodeSeq
 
 import no.bekk.scala._
@@ -27,5 +28,5 @@ class TestOppgaverSnippet  extends FlatSpec with ShouldMatchers with BeforeAndAf
 
 trait TestChallenges
 { self: Oppgaver =>
-  override val challengesList = List(new Challenge("Header", "", _.equals("svar")))
+  override val challengesList = List(new Challenge("Header", "", "", (q:Question, a:Any) => a.equals("svar")))
 }
