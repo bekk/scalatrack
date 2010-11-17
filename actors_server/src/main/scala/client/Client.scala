@@ -10,7 +10,7 @@ import se.scalablesolutions.akka.remote._
 class Client extends GiveAnswer
 {
   val team = new Team("test")
-  val remote = RemoteClient.actorFor("Server", "localhost", 9999)
+  val remote = RemoteClient.actorFor("Server", "10.0.21.100", 9999)
   
   def run {
 

@@ -6,35 +6,19 @@ trait Message
 
 case class MoreChallenges(val team:Team) extends Message
 case class Question(val question:String, val content:Any) extends Message
-object IntList
-{
-  def apply(content:List[Int]) = content.asInstanceOf[Any]
-  def unapply(list :Any) = try{
-    Some(list.asInstanceOf[List[Int]])
-  }catch{
-    case _ => None
-  }
-}
 
-object IntListList
+trait TypeExtractor[T]
 {
-  def apply(content:List[List[Int]]) = content.asInstanceOf[Any]
+  def apply(content:T) = content.asInstanceOf[Any]
   def unapply(list :Any) = try{
-    Some(list.asInstanceOf[List[List[Int]]])
+    Some(list.asInstanceOf[T])
   }catch{
     case _ => None
   }
 }
-
-object SymbolList
-{
-  def apply(content:List[Symbol]) = content.asInstanceOf[Any]
-  def unapply(list :Any) = try{
-    Some(list.asInstanceOf[List[Symbol]])
-  }catch{
-    case _ => None
-  }
-}
+object IntList extends TypeExtractor[List[Int]]
+object IntListList extends TypeExtractor[List[List[Int]]]
+object SymbolList extends TypeExtractor[List[Symbol]]
 
 
 case class Answer(val temaName:Team, val question:Question, val answer: Any) extends Message
