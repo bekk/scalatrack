@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  15 NOV 2010 21:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  17 NOV 2010 13:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1241,18 +1241,21 @@ Overfull \hbox (1.0pt too wide) in paragraph at lines 212--212
 
 ] [30
 
-] <./img/bekk.jpg, id=202, 1194.4625pt x 485.815pt>
-File: ./img/bekk.jpg Graphic file (type jpg)
+] [31
 
-<use ./img/bekk.jpg> <./img/bekk-logo.jpg, id=203, 234.8775pt x 61.22874pt>
+]
+<./img/bekk.jpg, id=209, 1194.4625pt x 485.815pt>
+File: ./img/bekk.jpg Graphic file (type jpg)
+ <use ./img/bekk.jpg>
+<./img/bekk-logo.jpg, id=210, 234.8775pt x 61.22874pt>
 File: ./img/bekk-logo.jpg Graphic file (type jpg)
 
 <use ./img/bekk-logo.jpg>
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/n' in size <1> not available
-(Font)              size <5> substituted on input line 406.
+(Font)              size <5> substituted on input line 431.
 
-[31
+[32
 
  <./img/bekk.jpg> <./img/bekk-logo.jpg>]
 \tf@nav=\write5
@@ -1274,10 +1277,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 17893 strings out of 494238
- 295535 string characters out of 1167101
+ 17906 strings out of 494238
+ 295682 string characters out of 1167101
  427114 words of memory out of 3000000
- 20546 multiletter control sequences out of 15000+50000
+ 20557 multiletter control sequences out of 15000+50000
  37296 words of font info for 104 fonts, out of 3000000 for 9000
  608 hyphenation exceptions out of 8191
  45i,14n,51p,598b,1364s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1290,9 +1293,9 @@ dotec.enc}</usr/share/texmf-texlive/fonts/type1/public/gfsdidot/GFSDidot-Bold.p
 fb></usr/share/texmf-texlive/fonts/type1/public/pxfonts/pxex.pfb></usr/share/te
 xmf-texlive/fonts/type1/public/pxfonts/pxsya.pfb></usr/share/texmf-texlive/font
 s/type1/public/txfonts/t1xtt.pfb>
-Output written on scala-actors.pdf (31 pages, 474232 bytes).
+Output written on scala-actors.pdf (32 pages, 475913 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 412 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
  72 words of extra memory for PDF output out of 10000 (max. 10000000)
 

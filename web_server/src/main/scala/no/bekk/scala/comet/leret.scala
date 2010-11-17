@@ -1,6 +1,7 @@
 package no.bekk.scala.comet
 
 import _root_.no.bekk.scala.lib.{CometServerScoreboardProvider, ChangesToTheScoreboard}
+import _root_.no.bekk.scala.snippet.QuizServer
 import net.liftweb._
 import http._
 import scala.xml._
@@ -27,8 +28,11 @@ class Leret extends CometActor with CometListener {
   def registerWith = LeretServer
 
   def startAkkaServer ={
-    RemoteNode.start("localhost", 9999)
+    RemoteNode.start("10.0.21.100", 9999)
     RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with CometServerScoreboardProvider))
+
+    QuizServer.address = "10.0.21.100"
+    QuizServer.port = "9999"
   }
 
 	override def lowPriority: PartialFunction[Any,Unit] = {

@@ -211,6 +211,31 @@
   \end{content}
 \end{frame}
 
+\begin{frame}[containsverbatim]{Actors - Akka}
+  \begin{content}
+    \begin{lstlisting}
+      import se.scalablesolutions.akka.actor._
+      import se.scalablesolutions.akka.remote._
+
+      class Client extends GiveAnswer
+      {
+        val team = new Team("test")
+        val remote = RemoteClient.actorFor("Server", "localhost", 9999)
+        
+        def run {
+
+          while(true)
+          {
+            val question = (remote !! MoreChallenges(team)).get.asInstanceOf[Question]
+            remote !! new Answer(team, question, giveAnswer(question) )
+          }
+        }
+
+      }
+    \end{lstlisting}
+  \end{content}
+\end{frame}
+
 \kontrast{Videre - oppgave}
 
 \begin{frame}[containsverbatim]{Oppgave - meldinger}

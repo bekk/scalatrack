@@ -2,12 +2,14 @@
   <h2>Velkommen til scala-tracket!</h2>
 
     <p>
-        <div>
-            <label>Server:</label><span>servernavn</span>
-        </div>
-        <div>
-            <label>Port:</label><span>portnummer</span>
-        </div>
+        <lift:Adress.index>
+            <div>
+                <label>Server:</label><span><adr:host/></span>
+            </div>
+            <div>
+                <label>Port:</label><span><adr:port/></span>
+            </div>
+        </lift:Adress.index>
     </p>
                          
 
