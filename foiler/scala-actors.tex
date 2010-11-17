@@ -61,9 +61,9 @@
   \begin{content}
     Quiz på vanlig måte, med en liten vri\\
     \center
-    1. Be om et spørsmål og få spørsmål\\
+    1. Be om et spørsmål og får spørsmål\\
     \includegraphics[scale=0.6]{quiz-sporsmalsvar}\\
-    2. Svar på spørsmålet og få vite om det er riktig
+    2. Svar på spørsmålet og får vite om det er riktig
   \end{content}
 \end{frame}
 
@@ -87,7 +87,7 @@
 
 \begin{frame}[fragile]{Actors - eksempler eksempler}
   \begin{content}
-    \begin{lstlisting}
+    \begin{lstlisting}[basicstyle={\large\ttfamily}]
       case class Tick
       
       class Counter extends Actor {
@@ -124,9 +124,9 @@
 \begin{frame}[containsverbatim]{Actors - in action}
   \begin{content}
     \centering
-    \begin{lstlisting}
-      case class MoreQuestions(val team:Team)
-      case class Question(val question:String, val content:Any)
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]
+case class MoreQuestions(val team:Team)
+case class Question(val question:String, val content:Any)
     \end{lstlisting}
     \begin{columns}
       \column{.1\textwidth}
@@ -136,9 +136,9 @@
       \column{.1\textwidth}
         Lag
     \end{columns}
-    \begin{lstlisting}
-      case class Answer(val team:Team, val question:Question, val answer:Any)
-      case class Correct extends Verdict
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]
+case class Answer(val team:Team, val question:Question, val answer:Any)
+case class Correct extends Verdict
     \end{lstlisting}
   \end{content}
 \end{frame}
@@ -146,24 +146,71 @@
 \begin{frame}[containsverbatim]{Actors - in action}
   \begin{content}
     \begin{columns}
-      \column{.2\textwidth}
+      \column{.35\textwidth}
         \includegraphics[scale=0.3]{quiz-sporsmalsvar}
       \column{.8\textwidth}
-        \begin{lstlisting}
-          val question = (remote !! MoreQuestions(team)).get.asInstanceOf[Question]
-          remote !! new Answer( team, question, giveAnswer(question) )
+        \begin{lstlisting}[basicstyle={\small\ttfamily}]
+val question = 
+  (remote !! MoreQuestions(team))
+  .get.asInstanceOf[Question]
+remote !! new Answer( team, question, giveAnswer(question) )
 
-          def giveAnswer(quiestion: Question)={
-            question match {
-              case x@Question("Ping", "") =>  "pong"
-            }
-          }
+def giveAnswer(quiestion: Question)={
+  question match {
+    case x@Question("Ping", _) =>  "pong"
+  }
+}
         \end{lstlisting}
     \end{columns}
   \end{content}
 \end{frame}
 
-\kontrast{Oppgave}
+
+\begin{frame}[containsverbatim]{Oppgave - meldinger}
+  \begin{content}
+    \begin{lstlisting}
+      package no.bekk.scala.messages
+      trait Message
+      trait Verdict
+
+      case class MoreChallenges(val team:Team) extends Message
+      case class Question(val question:String, val content:Any) extends Message
+
+      case class Answer(val temaName:Team, val question:Question, val answer: Any) extends Message
+      
+      case class Correct() extends Message with Verdict 
+      case class Wrong() extends Message with Verdict
+    \end{lstlisting}
+  \end{content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Oppgave - meldinger}
+  \begin{content}
+    \begin{lstlisting}
+      package no.bekk.scala.messages
+      trait Message
+      trait Verdict
+
+      case class MoreChallenges(val team:Team) extends Message
+      case class Question(val question:String, val content:Any) extends Message
+
+      case class Answer(val temaName:Team, val question:Question, val answer: Any) extends Message
+      
+      case class Correct() extends Message with Verdict 
+      case class Wrong() extends Message with Verdict
+    \end{lstlisting}
+  \end{content}
+
+  Ønsker å;
+    \begin{itemize}
+      \item ta i mot et spørsmål Question, 
+      \item finne ut hva det handler om, og 
+      \item besvare
+    \end{itemize}
+\end{frame}
+
+\kontrast{Oppgave \\\vfill\small https://github.com/aslakjo/quiz-client}
 
 
 \kontrast{Actors}
@@ -238,48 +285,7 @@
 
 \kontrast{Videre - oppgave}
 
-\begin{frame}[containsverbatim]{Oppgave - meldinger}
-  \begin{content}
-    \begin{lstlisting}
-      package no.bekk.scala.messages
-      trait Message
-      trait Verdict
 
-      case class MoreChallenges(val team:Team) extends Message
-      case class Question(val question:String, val content:Any) extends Message
-
-      case class Answer(val temaName:Team, val question:Question, val answer: Any) extends Message
-      
-      case class Correct() extends Message with Verdict 
-      case class Wrong() extends Message with Verdict
-    \end{lstlisting}
-  \end{content}
-\end{frame}
-
-\begin{frame}[containsverbatim]{Oppgave - meldinger}
-  \begin{content}
-    \begin{lstlisting}
-      package no.bekk.scala.messages
-      trait Message
-      trait Verdict
-
-      case class MoreChallenges(val team:Team) extends Message
-      case class Question(val question:String, val content:Any) extends Message
-
-      case class Answer(val temaName:Team, val question:Question, val answer: Any) extends Message
-      
-      case class Correct() extends Message with Verdict 
-      case class Wrong() extends Message with Verdict
-    \end{lstlisting}
-  \end{content}
-
-  Ønsker å;
-    \begin{itemize}
-      \item ta i mot et spørsmål Question, 
-      \item finne ut hva det handler om, og 
-      \item besvare
-    \end{itemize}
-\end{frame}
 
 \kontrast{Pattern matching}
 

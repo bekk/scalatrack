@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  17 NOV 2010 13:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.31)  17 NOV 2010 17:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1179,7 +1179,7 @@ Overfull \hbox (28.21866pt too wide) in paragraph at lines 134--136
 ]
 File: ./img/quiz-sporsmalsvar.png Graphic file (type png)
  <use ./img/quiz-sporsmalsvar.png>
-Overfull \hbox (47.63329pt too wide) in paragraph at lines 149--151
+Overfull \hbox (1.5804pt too wide) in paragraph at lines 149--151
 [][]  
  []
 
@@ -1189,32 +1189,32 @@ Overfull \hbox (47.63329pt too wide) in paragraph at lines 149--151
 
 ] [11
 
-]
-Overfull \hbox (16.61534pt too wide) detected at line 186
-[] \T1/rmfamily/m/it/20.74 Actors
- []
-
-[12
+] [12
 
 ] [13
 
-] [14
+]
+Overfull \hbox (16.61534pt too wide) detected at line 233
+[] \T1/rmfamily/m/it/20.74 Actors
+ []
 
-] <./img/mailbox.png, id=107, 360.72339pt x 152.68604pt>
+[14
+
+] [15
+
+] [16
+
+] <./img/mailbox.png, id=120, 360.72339pt x 152.68604pt>
 File: ./img/mailbox.png Graphic file (type png)
 
 <use ./img/mailbox.png>
-Overfull \hbox (1.0pt too wide) in paragraph at lines 212--212
+Overfull \hbox (1.0pt too wide) in paragraph at lines 259--259
 [][]  
  []
 
-[15
+[17
 
- <./img/mailbox.png>] [16
-
-] [17
-
-] [18
+ <./img/mailbox.png>] [18
 
 ] [19
 
@@ -1230,12 +1230,12 @@ Overfull \hbox (1.0pt too wide) in paragraph at lines 212--212
 
 ] [25
 
-]
-[26
+] [26
 
 ] [27
 
-] [28
+]
+[28
 
 ] [29
 
@@ -1243,17 +1243,16 @@ Overfull \hbox (1.0pt too wide) in paragraph at lines 212--212
 
 ] [31
 
-]
-<./img/bekk.jpg, id=209, 1194.4625pt x 485.815pt>
+] <./img/bekk.jpg, id=209, 1194.4625pt x 485.815pt>
 File: ./img/bekk.jpg Graphic file (type jpg)
- <use ./img/bekk.jpg>
-<./img/bekk-logo.jpg, id=210, 234.8775pt x 61.22874pt>
+
+<use ./img/bekk.jpg> <./img/bekk-logo.jpg, id=210, 234.8775pt x 61.22874pt>
 File: ./img/bekk-logo.jpg Graphic file (type jpg)
 
 <use ./img/bekk-logo.jpg>
 
 LaTeX Font Warning: Font shape `T1/rmfamily/m/n' in size <1> not available
-(Font)              size <5> substituted on input line 431.
+(Font)              size <5> substituted on input line 437.
 
 [32
 
@@ -1277,13 +1276,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 17906 strings out of 494238
- 295682 string characters out of 1167101
+ 17909 strings out of 494238
+ 295721 string characters out of 1167101
  427114 words of memory out of 3000000
- 20557 multiletter control sequences out of 15000+50000
- 37296 words of font info for 104 fonts, out of 3000000 for 9000
+ 20559 multiletter control sequences out of 15000+50000
+ 38683 words of font info for 107 fonts, out of 3000000 for 9000
  608 hyphenation exceptions out of 8191
- 45i,14n,51p,598b,1364s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,14n,51p,598b,1388s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/aslak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0500.600pk> </home/a
 slak/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/aslak/.texmf
 -var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/aslak/.texmf-var/fonts/
@@ -1293,7 +1292,7 @@ dotec.enc}</usr/share/texmf-texlive/fonts/type1/public/gfsdidot/GFSDidot-Bold.p
 fb></usr/share/texmf-texlive/fonts/type1/public/pxfonts/pxex.pfb></usr/share/te
 xmf-texlive/fonts/type1/public/pxfonts/pxsya.pfb></usr/share/texmf-texlive/font
 s/type1/public/txfonts/t1xtt.pfb>
-Output written on scala-actors.pdf (32 pages, 475913 bytes).
+Output written on scala-actors.pdf (32 pages, 476652 bytes).
 PDF statistics:
  412 PDF objects out of 1000 (max. 8388607)
  58 named destinations out of 1000 (max. 500000)

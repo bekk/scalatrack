@@ -1,5 +1,5 @@
 \frametitle {Actors - eksempler eksempler}\begin {content}
-    \begin{lstlisting}
+    \begin{lstlisting}[basicstyle={\large\ttfamily}]
       case class Tick
 
       class Counter extends Actor {
