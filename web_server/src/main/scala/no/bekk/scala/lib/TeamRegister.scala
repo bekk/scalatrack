@@ -33,14 +33,16 @@ trait TeamRegister extends TeamService
 
   def registerFaildChallenge(team : Team, question: Question)= {
     println("team klarte ikke spørsmål  " + team + ", "+ question)
-    val teamList = teamsAnswers.get(team).get
-    teamsAnswers = teamsAnswers + ((team, teamList.map( answer =>{
-        if(answer._1.equals(question))
+    val teamList = teamsAnswers.get(team) match {
+      case Some(teamList) => teamsAnswers = teamsAnswers + ((team, teamList.map( answer =>{
+        if(answer._1.question.equals(question.question))
           (question, None)
         else
           answer
-      })
-    ))
+      })))
+      case None => teamsAnswers = teamsAnswers + ((team, List((question, None))))
+    }
+
   }
 
   private def firstAnswer(question: Question, answer:Option[Any]):List[(Question,Option[Any])] = {

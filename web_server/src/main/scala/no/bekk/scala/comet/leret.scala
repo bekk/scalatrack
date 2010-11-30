@@ -28,10 +28,10 @@ class Leret extends CometActor with CometListener {
   def registerWith = LeretServer
 
   def startAkkaServer ={
-    RemoteNode.start("10.0.21.100", 9999)
+    RemoteNode.start("127.0.0.1", 9999)
     RemoteNode.register("Server", Actor.actorOf(new Server with Challenges with CometServerScoreboardProvider))
 
-    QuizServer.address = "10.0.21.100"
+    QuizServer.address = "127.0.0.1"
     QuizServer.port = "9999"
   }
 
