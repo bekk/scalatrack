@@ -13,10 +13,7 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaPr
   "http://scala-tools.org/repo-releases/"
 
   val liftVersion = "2.1"
-
-  val maling = "no.bekk" %% "maling" % "0.1.4"
-  val messages = "no.bekk.scala" %% "messages" % "1.0.1" 
-
+  
   val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
 
   override def libraryDependencies = Set(
