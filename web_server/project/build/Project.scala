@@ -1,6 +1,8 @@
 import sbt._
 
 class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with AkkaProject {
+  val mavenMirror = "Mirror mave" at
+    "http://mirrors.ibiblio.org/pub/mirrors/maven2/"
   val mavenLocal = "Local Maven Repository" at
   "file://"+Path.userHome+"/.m2/repository"
 
